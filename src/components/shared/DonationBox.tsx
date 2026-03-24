@@ -36,7 +36,6 @@ export default function DonationBox({ className }: DonationBoxProps) {
   const suffix = tab === "monthly" ? " USD/mo" : " USD";
 
   const handleDonate = useCallback(() => {
-    if (!activeAmount) return;
     if (!DONATION_BASE_URL) return;
 
     const url = new URL(DONATION_BASE_URL);
@@ -136,7 +135,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
       {/* CTA */}
       <button
         type="button"
-        disabled={!activeAmount || !DONATION_BASE_URL}
+        disabled={!activeAmount}
         onClick={handleDonate}
         className={cn(
           "w-full rounded-lg py-3.5 font-title text-base uppercase tracking-wide transition-colors",
