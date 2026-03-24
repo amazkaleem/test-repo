@@ -1,137 +1,60 @@
 "use client";
 
-import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
+import DonationBox from "../shared/DonationBox";
+import SectionWrapper from "../shared/SectionWrapper";
 
-type DonationTab = "monthly" | "oneTime";
+const CURRENT_SUPPORTERS = 327;
+const GOAL_SUPPORTERS = 1000;
+const PROGRESS_PERCENT = (CURRENT_SUPPORTERS / GOAL_SUPPORTERS) * 100;
 
-const AMOUNTS = [5, 10, 25, 100] as const;
-const DEFAULT_AMOUNT = 10;
-
-interface DonationBoxProps {
-  className?: string;
-}
-
-export default function DonationBox({ className }: DonationBoxProps) {
-  const t = useTranslations("monthlyDonation.donation");
-  const [tab, setTab] = useState<DonationTab>("monthly");
-  const [selected, setSelected] = useState<number | null>(DEFAULT_AMOUNT);
-  const [custom, setCustom] = useState("");
-
-  const selectPreset = useCallback((amount: number) => {
-    setSelected(amount);
-    setCustom("");
-  }, []);
-
-  const handleCustom = useCallback((value: string) => {
-    // Allow only digits
-    const sanitized = value.replace(/\D/g, "");
-    setCustom(sanitized);
-    setSelected(null);
-  }, []);
-
-  const activeAmount = selected ?? (custom ? Number(custom) : null);
-  const suffix = tab === "monthly" ? " USD/mo" : " USD";
+export default function DonationSection() {
+  const t = useTranslations("monthlyDonation");
 
   return (
-    <article
-      className={cn("w-full max-w-sm rounded-xl bg-[#F9F7F3] p-6 shadow-xl", className)}
-      aria-label="Donation selector"
-    >
-      {/* Tab toggle */}
-      <nav
-        className="mb-5 flex border-b border-[#ECEBE5] pb-4"
-        role="tablist"
-        aria-label="Donation frequency"
-      >
-        {(["monthly", "oneTime"] as const).map((key) => (
-          <button
-            key={key}
-            role="tab"
-            aria-selected={tab === key}
-            onClick={() => setTab(key)}
-            className={cn(
-              "flex-1 py-2 text-center font-title text-sm uppercase tracking-wide transition-colors",
-              tab === key
-                ? "rounded-sm bg-[#FECB26] text-shh-black"
-                : "text-gray-500 hover:text-shh-black"
-            )}
-          >
-            {t(`tabs.${key}`)}
-          </button>
-        ))}
-      </nav>
+    <SectionWrapper id="donation-section" className="bg-[#F5F4EF] px-4 py-20 md:px-8 lg:px-16">
+      <div className="mx-auto max-w-3xl text-center">
+        {/* Social-proof headline */}
+        <h2 className="font-title text-4xl leading-tight text-shh-black sm:text-2xl md:text-4xl lg:text-6xl">
+          {t("socialProof.headline")}
+        </h2>
+        <p className="mt-2 font-title text-lg text-shh-black sm:text-2xl md:text-2xl">
+          {t("socialProof.subheadline")}
+        </p>
 
-      {/* Amount grid */}
-      <fieldset className="mb-4 grid grid-cols-3 gap-2">
-        <legend className="sr-only">Select amount</legend>
-
-        {AMOUNTS.map((amount) => (
-          <button
-            key={amount}
-            type="button"
-            onClick={() => selectPreset(amount)}
-            className={cn(
-              "rounded-sm border-2 px-3 py-2.5 text-center font-body text-sm font-semibold transition-colors",
-              selected === amount
-                ? "border-[#FECB26] bg-[#FECB26] text-shh-black"
-                : "border-[#ECEBE5] bg-[#ECEBE5] text-gray-700 hover:border-gray-400"
-            )}
-          >
-            <span className="mr-1 font-title text-base">${amount}</span>
-            {/* Invisible "USD/mo" reserves max width; visible suffix overlays it */}
-            <span className="relative inline-block text-xs text-gray-500">
-              <span className="invisible" aria-hidden="true">
-                {" "}
-                USD/mo
-              </span>
-              <span className="absolute inset-0">{suffix}</span>
+        {/* Progress bar */}
+        <div className="mx-auto mt-10 max-w-md">
+          <div className="relative h-12 overflow-hidden rounded-full border-2 border-shh-black bg-white">
+            {/* Filled portion */}
+            <div
+              className="absolute inset-y-0 left-0 m-[3px] rounded-full bg-[#FECB26] transition-all duration-700"
+              style={{ width: `${PROGRESS_PERCENT}%` }}
+            />
+            {/* Label */}
+            <span className="absolute inset-0 flex items-center justify-start pl-5 font-title text-sm text-shh-black">
+              {t("donation.progress.label")}
             </span>
-          </button>
-        ))}
+          </div>
+          <p className="mt-3 font-body text-lg text-gray-600 sm:text-2xl md:text-2xl">
+            {t("donation.progress.cta")}
+          </p>
+        </div>
 
-        {/* Custom amount */}
-        <label
-          className={cn(
-            "col-span-2 flex items-center gap-1 rounded-lg border-2 px-3 py-2.5 transition-colors",
-            selected === null && custom
-              ? "border-[#FECB26] bg-[#FECB26]"
-              : "border-[#ECEBE5] bg-[#ECEBE5] hover:border-gray-400"
-          )}
-        >
-          {custom && <span className="font-title text-base">$</span>}
-          <input
-            type="text"
-            inputMode="numeric"
-            placeholder={t("amounts.custom")}
-            value={custom}
-            onChange={(e) => handleCustom(e.target.value)}
-            className="w-full bg-transparent text-sm font-semibold outline-none placeholder:font-body placeholder:font-normal placeholder:text-gray-500"
-            aria-label={t("amounts.custom")}
-          />
-        </label>
-      </fieldset>
+        {/* "Become a monthly donor" headline */}
+        <h3 className="mt-6 font-title text-4xl font-bold leading-tight text-shh-black sm:text-2xl md:text-4xl lg:text-6xl">
+          {t("donation.donationSection.headline")}
+        </h3>
 
-      {/* Note */}
-      <p className="mb-5 flex items-center gap-1.5 text-sm text-gray-600">
-        <span aria-hidden="true">💛</span>
-        {t("note")}
-      </p>
+        {/* Donation widget (reusing existing DonationBox) */}
+        <div className="mt-10 flex justify-center">
+          <DonationBox />
+        </div>
 
-      {/* CTA */}
-      <button
-        type="button"
-        disabled={!activeAmount}
-        className={cn(
-          "w-full rounded-lg py-3.5 font-title text-base uppercase tracking-wide transition-colors",
-          activeAmount
-            ? "bg-[#FECB26] text-shh-black hover:brightness-105"
-            : "cursor-not-allowed bg-[#ECEBE5] text-gray-400"
-        )}
-      >
-        {t("cta")}
-      </button>
-    </article>
+        {/* Cancel note */}
+        <p className="mt-6 font-body text-lg text-gray-500 sm:text-2xl md:text-2xl">
+          {t("donation.donationSection.cancelNote")}
+        </p>
+      </div>
+    </SectionWrapper>
   );
 }

@@ -36,10 +36,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
 
   return (
     <article
-      className={cn(
-        "w-full max-w-sm rounded-xl bg-[#F9F7F3] p-6 shadow-xl",
-        className,
-      )}
+      className={cn("w-full max-w-sm rounded-xl bg-[#F9F7F3] p-6 shadow-xl", className)}
       aria-label="Donation selector"
     >
       {/* Tab toggle */}
@@ -58,7 +55,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
               "flex-1 py-2 text-center font-title text-sm uppercase tracking-wide transition-colors",
               tab === key
                 ? "rounded-sm bg-[#FECB26] text-shh-black"
-                : "text-gray-500 hover:text-shh-black",
+                : "text-gray-500 hover:text-shh-black"
             )}
           >
             {t(`tabs.${key}`)}
@@ -79,13 +76,16 @@ export default function DonationBox({ className }: DonationBoxProps) {
               "rounded-sm border-2 px-3 py-2.5 text-center font-body text-sm font-semibold transition-colors",
               selected === amount
                 ? "border-[#FECB26] bg-[#FECB26] text-shh-black"
-                : "border-[#ECEBE5] bg-[#ECEBE5] text-gray-700 hover:border-gray-400",
+                : "border-[#ECEBE5] bg-[#ECEBE5] text-gray-700 hover:border-gray-400"
             )}
           >
-            <span className="font-title text-base mr-1">${amount}</span>
+            <span className="mr-1 font-title text-base">${amount}</span>
             {/* Invisible "USD/mo" reserves max width; visible suffix overlays it */}
             <span className="relative inline-block text-xs text-gray-500">
-              <span className="invisible" aria-hidden="true">{" "}USD/mo</span>
+              <span className="invisible" aria-hidden="true">
+                {" "}
+                USD/mo
+              </span>
               <span className="absolute inset-0">{suffix}</span>
             </span>
           </button>
@@ -97,7 +97,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
             "col-span-2 flex items-center gap-1 rounded-lg border-2 px-3 py-2.5 transition-colors",
             selected === null && custom
               ? "border-[#FECB26] bg-[#FECB26]"
-              : "border-[#ECEBE5] bg-[#ECEBE5] hover:border-gray-400",
+              : "border-[#ECEBE5] bg-[#ECEBE5] hover:border-gray-400"
           )}
         >
           {custom && <span className="font-title text-base">$</span>}
@@ -127,7 +127,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
           "w-full rounded-lg py-3.5 font-title text-base uppercase tracking-wide transition-colors",
           activeAmount
             ? "bg-[#FECB26] text-shh-black hover:brightness-105"
-            : "cursor-not-allowed bg-[#ECEBE5] text-gray-400",
+            : "cursor-not-allowed bg-[#ECEBE5] text-gray-400"
         )}
       >
         {t("cta")}
