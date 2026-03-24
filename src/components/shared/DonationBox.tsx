@@ -2,13 +2,13 @@
 
 import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
+import { usePathname, useRouter } from "@/navigation";
 import { cn } from "@/lib/utils";
 
 type DonationTab = "monthly" | "oneTime";
 
 const AMOUNTS = [5, 10, 25, 100] as const;
 const DEFAULT_AMOUNT = 10;
-const DONATION_BASE_URL = process.env.NEXT_PUBLIC_DONATION_BASE_URL;
 
 interface DonationBoxProps {
   className?: string;
@@ -16,6 +16,8 @@ interface DonationBoxProps {
 
 export default function DonationBox({ className }: DonationBoxProps) {
   const t = useTranslations("monthlyDonation.donation");
+  const router = useRouter();
+  const pathname = usePathname();
   const [tab, setTab] = useState<DonationTab>("monthly");
   const [selected, setSelected] = useState<number | null>(DEFAULT_AMOUNT);
   const [custom, setCustom] = useState("");
@@ -37,16 +39,15 @@ export default function DonationBox({ className }: DonationBoxProps) {
 
   const handleDonate = useCallback(() => {
     if (!activeAmount) return;
-
-    const baseUrl = DONATION_BASE_URL ?? window.location.origin;
-    const url = new URL(baseUrl);
     const frequency = tab === "oneTime" ? "one-time" : "monthly";
+    const params = new URLSearchParams(window.location.search);
 
-    url.searchParams.set("campaign", "782216");
-    url.searchParams.set("frequency", frequency);
-    url.searchParams.set("amount", String(activeAmount));
-    window.location.assign(url.toString());
-  }, [activeAmount, tab]);
+    params.set("campaign", "782216");
+    params.set("frequency", frequency);
+    params.set("amount", String(activeAmount));
+
+    router.push(`${pathname}?${params.toString()}`);
+  }, [activeAmount, pathname, router, tab]);
 
   return (
     <article
