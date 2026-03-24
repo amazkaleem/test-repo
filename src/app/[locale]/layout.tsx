@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "../globals.css";
@@ -90,19 +89,15 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages();
 
   return (
-    <>
-      <Script
-        src="https://giving.gofundme.com/embedded/api/sdk/js/38471"
-        strategy="afterInteractive"
-      />
-      <NextIntlClientProvider messages={messages}>
-        <Header />
-        <main id="main-content" lang={locale}>
-          {children}
-        </main>
-        <Footer />
-      </NextIntlClientProvider>
-    </>
+    <html lang={locale} suppressHydrationWarning>
+      <body>
+        <NextIntlClientProvider messages={messages}>
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
 
