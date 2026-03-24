@@ -22,6 +22,9 @@ export default function DonationBox({ className }: DonationBoxProps) {
         className="min-h-24"
         aria-label={t("cta")}
       />
+      <a href="/?campaign=782216" {...classyAttributes} className="sr-only" aria-label={t("cta")}>
+        {t("cta")}
+      </a>
       <p className="mb-5 flex items-center gap-1.5 text-sm text-gray-600">
         <span aria-hidden="true">💛</span>
         {t("note")}
