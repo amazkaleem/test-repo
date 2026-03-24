@@ -8,6 +8,7 @@ type DonationTab = "monthly" | "oneTime";
 
 const AMOUNTS = [5, 10, 25, 100] as const;
 const DEFAULT_AMOUNT = 10;
+const DONATION_BASE_URL = process.env.NEXT_PUBLIC_DONATION_BASE_URL;
 
 interface DonationBoxProps {
   className?: string;
@@ -36,10 +37,16 @@ export default function DonationBox({ className }: DonationBoxProps) {
 
   const handleDonate = useCallback(() => {
     if (!activeAmount) return;
-    const url = new URL(window.location.href);
+    if (!DONATION_BASE_URL) return;
+
+    const url = new URL(DONATION_BASE_URL);
+    const frequency = tab === "oneTime" ? "one-time" : "monthly";
+
     url.searchParams.set("campaign", "782216");
+    url.searchParams.set("frequency", frequency);
+    url.searchParams.set("amount", String(activeAmount));
     window.location.assign(url.toString());
-  }, [activeAmount]);
+  }, [activeAmount, tab]);
 
   return (
     <article
@@ -129,11 +136,11 @@ export default function DonationBox({ className }: DonationBoxProps) {
       {/* CTA */}
       <button
         type="button"
-        disabled={!activeAmount}
+        disabled={!activeAmount || !DONATION_BASE_URL}
         onClick={handleDonate}
         className={cn(
           "w-full rounded-lg py-3.5 font-title text-base uppercase tracking-wide transition-colors",
-          activeAmount
+          activeAmount && DONATION_BASE_URL
             ? "bg-[#FECB26] text-shh-black hover:brightness-105"
             : "cursor-not-allowed bg-[#ECEBE5] text-gray-400"
         )}
