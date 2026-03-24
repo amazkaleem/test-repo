@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/navigation";
 import { cn } from "@/lib/utils";
 
 type DonationTab = "monthly" | "oneTime";
@@ -16,8 +15,6 @@ interface DonationBoxProps {
 
 export default function DonationBox({ className }: DonationBoxProps) {
   const t = useTranslations("monthlyDonation.donation");
-  const router = useRouter();
-  const pathname = usePathname();
   const [tab, setTab] = useState<DonationTab>("monthly");
   const [selected, setSelected] = useState<number | null>(DEFAULT_AMOUNT);
   const [custom, setCustom] = useState("");
@@ -39,8 +36,10 @@ export default function DonationBox({ className }: DonationBoxProps) {
 
   const handleDonate = useCallback(() => {
     if (!activeAmount) return;
-    router.push(`${pathname}?campaign=782216`);
-  }, [activeAmount, pathname, router]);
+    const url = new URL(window.location.href);
+    url.searchParams.set("campaign", "782216");
+    window.location.assign(url.toString());
+  }, [activeAmount]);
 
   return (
     <article
