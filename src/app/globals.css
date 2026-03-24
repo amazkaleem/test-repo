@@ -1,0 +1,80 @@
+/* GT-Walsheim font declarations — files must exist in /public/fonts/ */
+@font-face {
+    font-family: "GT-Walsheim-Bold";
+    src: url("/fonts/gt-walsheim-bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    /* swap = show fallback immediately, replace when brand font loads */
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "GT-Walsheim-Regular";
+    src: url("/fonts/gt-walsheim-regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ShadCN CSS variable layer — all values mapped to SHH brand palette */
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 2% 15%;
+        /* shh-black #282424 */
+
+        --card: 0 0% 100%;
+        --card-foreground: 0 2% 15%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 2% 15%;
+
+        /* shh-green #2fcba3 → hsl(162, 64%, 49%) */
+        --primary: 162 64% 49%;
+        --primary-foreground: 0 0% 100%;
+
+        /* shh-yellow #f9c947 → hsl(43, 93%, 63%) */
+        --secondary: 43 93% 63%;
+        --secondary-foreground: 0 2% 15%;
+
+        --muted: 210 40% 96%;
+        --muted-foreground: 215 16% 47%;
+
+        --accent: 43 93% 63%;
+        --accent-foreground: 0 2% 15%;
+
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+
+        --border: 214 32% 91%;
+        --input: 214 32% 91%;
+        --ring: 162 64% 49%;
+
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background font-body text-foreground;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-title;
+    }
+}

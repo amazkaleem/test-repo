@@ -1,0 +1,147 @@
+{
+  "monthlyDonation": {
+    "hero": {
+      "headline": "111 Schools Already Built.",
+      "subheadline": "Help Us Build 1,000."
+    },
+    "donation": {
+      "tabs": {
+        "monthly": "Monthly",
+        "oneTime": "Give Once"
+      },
+      "amounts": {
+        "5": "$5 USD/mo",
+        "10": "$10 USD/mo",
+        "25": "$25 USD/mo",
+        "100": "$100 USD/mo",
+        "custom": "Other amount"
+      },
+      "note": "Helps build schools faster.",
+      "cta": "Join Today",
+      "progress": {
+        "current": "327",
+        "goal": "1,000",
+        "label": "327 / 1,000",
+        "cta": "Help us reach 1,000 supporters"
+      },
+      "donationSection": {
+        "headline": "Become a monthly donor",
+        "cancelNote": "Cancel anytime."
+      }
+    },
+    "pitch": {
+      "headline": "For just $5/month",
+      "subheadline": "you can help build the next school in Honduras"
+    },
+    "socialProof": {
+      "headline": "Join 327 supporters",
+      "subheadline": "already building schools in Honduras"
+    },
+    "updates": {
+      "headline": "Receive exclusive updates from Shin and his team",
+      "description": "Monthly donors receive exclusive behind-the-scenes updates from Shin and the One Thousand Schools Team through WhatsApp — including photos, videos, and stories from Villa Soleada and the schools you're helping build."
+    },
+    "impact": {
+      "headline": "See the impact",
+      "video1Caption": "111 schools built and every new supporter helps fund the next school in Honduras",
+      "video2Caption": "Donations also support the Villa Soleada Children’s Home and Bilingual School"
+    },
+    "faq": {
+      "headline": "Frequently asked questions",
+      "items": [
+        {
+          "question": "What will my monthly donation be used for?",
+          "answer": "Donations support the construction of schools in Honduras and the operational costs necessary to carry out this work. They also help sustain the Villa Soleada Children’s Home and Bilingual School, covering part of their current expenses."
+        },
+        {
+          "question": "Are donations tax deductible?",
+          "answer": "If you live in the United States, your donation is tax deductible. We recommend consulting your tax advisor for more information."
+        },
+        {
+          "question": "Can I cancel my monthly donation?",
+          "answer": "Yes. You can cancel or modify your monthly donation at any time by emailing us at info@shhkids.org."
+        },
+        {
+          "question": "How many schools have been built so far?",
+          "answer": "111 schools have already been built in different communities across Honduras."
+        },
+        {
+          "question": "Why monthly donations?",
+          "answer": "Monthly donations allow us to plan better, maintain our programs, and build more schools consistently."
+        },
+        {
+          "question": "How can I see the impact of my donation?",
+          "answer": "We regularly share updates, photos, and videos about the progress of school construction and the impact on communities. You can choose to receive updates by email or through WhatsApp messages."
+        },
+        {
+          "question": "Can I donate more than the suggested amounts?",
+          "answer": "Yes. You can select \"Custom amount\" and enter any monthly amount you wish to contribute."
+        },
+        {
+          "question": "What if I change my WhatsApp number?",
+          "answer": "Let us know at info@shhkids.org so we can update your number."
+        }
+      ]
+    },
+    "contact": {
+      "headline": "Contact us",
+      "emailLabel": "Email"
+    },
+    "social": {
+      "headline": "Follow the journey"
+    }
+  },
+  "nav": {
+    "donate": "Donate",
+    "mission": "Our Mission",
+    "impact": "Our Impact",
+    "whatsapp": "Join WhatsApp",
+    "menu": "Menu"
+  },
+  "hero": {
+    "headline": "Building 1,000 Schools in Honduras",
+    "subheadline": "Help us break the cycle of poverty through education and youth empowerment.",
+    "cta": "Donate Now"
+  },
+  "impact": {
+    "heading": "Our Impact",
+    "villaSoleada": "Villa Soleada",
+    "thousandSchools": "1,000 Schools Program",
+    "students": "Students at Our School",
+    "housesBuilt": "Houses Built",
+    "jobsCreated": "Jobs Created",
+    "schoolsBuilt": "Schools Built",
+    "studentsImpacted": "Students Impacted",
+    "teachersTrained": "Teachers Trained"
+  },
+  "mission": {
+    "heading": "What Guides Us",
+    "jobCreation": "Job Creation",
+    "jobCreationDesc": "We battle Honduras's high unemployment rate by creating jobs and training opportunities for local nationals. All of our program directors, contractors, and suppliers are Honduran.",
+    "community": "Community Ownership",
+    "communityDesc": "Village councils and parents' committees are involved with our school builds from beginning to end — planning, maintenance, and providing labor and materials.",
+    "sustainability": "Sustainability",
+    "sustainabilityDesc": "We invest in local leadership, government partnerships, and income-generating projects to ensure our programs last for generations.",
+    "leadership": "Local Leadership",
+    "leadershipDesc": "We play a supporting role to community leaders already working heroically to address the education crisis. Our staff work alongside them in solidarity."
+  },
+  "donate": {
+    "heading": "Make a Difference",
+    "subheading": "Your donation helps equip Honduran communities with the resources they need to address the education crisis."
+  },
+  "whatsapp": {
+    "heading": "Join Our WhatsApp Broadcast",
+    "subheading": "Get updates on our work in Honduras directly to your phone.",
+    "namePlaceholder": "Your Name",
+    "phonePlaceholder": "WhatsApp Number (with country code)",
+    "submit": "Sign Up"
+  },
+  "footer": {
+    "tagline": "Alleviating violence and extreme poverty in Honduras through education and youth empowerment.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "copyright": "Students Helping Honduras. All rights reserved.",
+    "nonprofit": "501(c)(3) Nonprofit"
+  }
+}

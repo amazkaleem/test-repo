@@ -1,0 +1,148 @@
+{
+  "monthlyDonation": {
+    "hero": {
+      "headline": "111 escuelas ya construidas.",
+      "subheadline": "Ayúdanos a construir 1,000."
+    },
+    "donation": {
+      "tabs": {
+        "monthly": "Mensual",
+        "oneTime": "Donar una vez"
+      },
+      "amounts": {
+        "5": "$5 USD/mes",
+        "10": "$10 USD/mes",
+        "25": "$25 USD/mes",
+        "100": "$100 USD/mes",
+        "custom": "Otra cantidad"
+      },
+      "note": "Ayuda a construir escuelas más rápido.",
+      "cta": "Únete hoy",
+      "progress": {
+        "current": "327",
+        "goal": "1,000",
+        "label": "327 / 1,000",
+        "cta": "Ayúdanos a llegar a 1,000 personas"
+      },
+      "donationSection": {
+        "headline": "Conviértete en donante mensual",
+        "cancelNote": "Cancela en cualquier momento."
+      }
+    },
+    "pitch": {
+      "headline": "Por solo $5/mes",
+      "subheadline": "puedes ayudar a construir la próxima escuela en Honduras"
+    },
+    "socialProof": {
+      "headline": "Únete a 327 personas",
+      "subheadline": "que ya están construyendo escuelas en Honduras"
+    },
+    "updates": {
+      "headline": "Recibe actualizaciones exclusivas de Shin y su equipo",
+      "description": "Los donantes mensuales reciben actualizaciones exclusivas detrás de escena del equipo de One Thousand Schools a través de WhatsApp, incluyendo fotos, videos e historias de Villa Soleada y de las escuelas que estás ayudando a construir."
+    },
+    "impact": {
+      "headline": "Mira el impacto",
+      "video1Caption": "111 escuelas construidas y cada nuevo donante ayuda a financiar la próxima escuela en Honduras",
+      "video2Caption": "Las donaciones también apoyan el Hogar Infantil Villa Soleada y la Escuela Bilingüe"
+    },
+    "faq": {
+      "headline": "Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿En qué se utilizará mi donación mensual?",
+          "answer": "Las donaciones apoyan la construcción de escuelas en Honduras y los costos operativos necesarios para llevar a cabo este trabajo. También ayudan a sostener el Hogar Infantil Villa Soleada y la Escuela Bilingüe, cubriendo parte de sus gastos actuales."
+        },
+        {
+          "question": "¿Las donaciones son deducibles de impuestos?",
+          "answer": "Si resides en Estados Unidos, tu donación es deducible de impuestos. Recomendamos consultar con tu asesor fiscal para más información."
+        },
+        {
+          "question": "¿Puedo cancelar mi donación mensual?",
+          "answer": "Sí. Puedes cancelar o modificar tu donación mensual en cualquier momento enviándonos un correo a info@shhkids.org."
+        },
+        {
+          "question": "¿Cuántas escuelas se han construido hasta ahora?",
+          "answer": "Ya se han construido 111 escuelas en diferentes comunidades de Honduras."
+        },
+        {
+          "question": "¿Por qué donaciones mensuales?",
+          "answer": "Las donaciones mensuales nos permiten planificar mejor, mantener nuestros programas y construir más escuelas de manera constante."
+        },
+        {
+          "question": "¿Cómo puedo ver el impacto de mi donación?",
+          "answer": "Compartimos regularmente actualizaciones, fotos y videos sobre el progreso de la construcción de escuelas y su impacto en las comunidades. Puedes recibir actualizaciones por correo electrónico o mediante WhatsApp."
+        },
+        {
+          "question": "¿Puedo donar más que las cantidades sugeridas?",
+          "answer": "Sí. Puedes seleccionar \"Cantidad personalizada\" e ingresar cualquier monto mensual que desees aportar."
+        },
+        {
+          "question": "¿Qué pasa si cambio mi número de WhatsApp?",
+          "answer": "Avísanos en info@shhkids.org para actualizar tu número."
+        }
+      ]
+    },
+    "contact": {
+      "headline": "Contáctanos",
+      "emailLabel": "Correo electrónico"
+    },
+    "social": {
+      "headline": "Sigue el recorrido"
+    }
+  },
+  
+  "nav": {
+    "donate": "Donar",
+    "mission": "Nuestra Misión",
+    "impact": "Nuestro Impacto",
+    "whatsapp": "Únete a WhatsApp",
+    "menu": "Menú"
+  },
+  "hero": {
+    "headline": "Construyendo 1,000 Escuelas en Honduras",
+    "subheadline": "Ayúdanos a romper el ciclo de la pobreza a través de la educación y el empoderamiento juvenil.",
+    "cta": "Donar Ahora"
+  },
+  "impact": {
+    "heading": "Nuestro Impacto",
+    "villaSoleada": "Villa Soleada",
+    "thousandSchools": "Programa 1,000 Escuelas",
+    "students": "Estudiantes en Nuestra Escuela",
+    "housesBuilt": "Casas Construidas",
+    "jobsCreated": "Empleos Creados",
+    "schoolsBuilt": "Escuelas Construidas",
+    "studentsImpacted": "Estudiantes Impactados",
+    "teachersTrained": "Maestros Capacitados"
+  },
+  "mission": {
+    "heading": "Lo Que Nos Guía",
+    "jobCreation": "Creación de Empleo",
+    "jobCreationDesc": "Combatimos la alta tasa de desempleo de Honduras creando empleos y oportunidades de capacitación para los locales. Todos nuestros directores de programas, contratistas y proveedores son hondureños.",
+    "community": "Participación Comunitaria",
+    "communityDesc": "Los consejos de aldea y los comités de padres participan en la construcción de nuestras escuelas de principio a fin: planificación, mantenimiento y aportando mano de obra y materiales.",
+    "sustainability": "Sostenibilidad",
+    "sustainabilityDesc": "Invertimos en liderazgo local, alianzas gubernamentales y proyectos generadores de ingresos para garantizar que nuestros programas duren generaciones.",
+    "leadership": "Liderazgo Local",
+    "leadershipDesc": "Desempeñamos un papel de apoyo a los líderes comunitarios que ya trabajan heroicamente para abordar la crisis educativa. Nuestro personal trabaja junto a ellos en solidaridad."
+  },
+  "donate": {
+    "heading": "Haz la Diferencia",
+    "subheading": "Tu donación ayuda a equipar a las comunidades hondureñas con los recursos que necesitan para enfrentar la crisis educativa."
+  },
+  "whatsapp": {
+    "heading": "Únete a Nuestra Transmisión de WhatsApp",
+    "subheading": "Recibe actualizaciones sobre nuestro trabajo en Honduras directamente en tu teléfono.",
+    "namePlaceholder": "Tu Nombre",
+    "phonePlaceholder": "Número de WhatsApp (con código de país)",
+    "submit": "Registrarse"
+  },
+  "footer": {
+    "tagline": "Aliviando la violencia y la pobreza extrema en Honduras a través de la educación y el empoderamiento juvenil.",
+    "quickLinks": "Enlaces Rápidos",
+    "contact": "Contacto",
+    "followUs": "Síguenos",
+    "copyright": "Students Helping Honduras. Todos los derechos reservados.",
+    "nonprofit": "Organización sin fines de lucro 501(c)(3)"
+  }
+}
