@@ -36,9 +36,10 @@ export default function DonationBox({ className }: DonationBoxProps) {
   const suffix = tab === "monthly" ? " USD/mo" : " USD";
 
   const handleDonate = useCallback(() => {
-    if (!DONATION_BASE_URL) return;
+    if (!activeAmount) return;
 
-    const url = new URL(DONATION_BASE_URL);
+    const baseUrl = DONATION_BASE_URL ?? window.location.origin;
+    const url = new URL(baseUrl);
     const frequency = tab === "oneTime" ? "one-time" : "monthly";
 
     url.searchParams.set("campaign", "782216");
@@ -139,7 +140,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
         onClick={handleDonate}
         className={cn(
           "w-full rounded-lg py-3.5 font-title text-base uppercase tracking-wide transition-colors",
-          activeAmount && DONATION_BASE_URL
+          activeAmount
             ? "bg-[#FECB26] text-shh-black hover:brightness-105"
             : "cursor-not-allowed bg-[#ECEBE5] text-gray-400"
         )}
