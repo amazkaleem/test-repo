@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +34,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
   const activeAmount = selected ?? (custom ? Number(custom) : null);
   const suffix = tab === "monthly" ? " USD/mo" : " USD";
 
-  const handleDonate = useCallback(() => {
+  useEffect(() => {
     if (!activeAmount) return;
     const frequency = tab === "oneTime" ? "one-time" : "monthly";
     const url = new URL(window.location.href);
@@ -43,9 +43,13 @@ export default function DonationBox({ className }: DonationBoxProps) {
     url.searchParams.set("frequency", frequency);
     url.searchParams.set("amount", String(activeAmount));
 
-    window.history.pushState({}, "", url.toString());
-    window.dispatchEvent(new PopStateEvent("popstate"));
+    window.history.replaceState({}, "", url.toString());
   }, [activeAmount, tab]);
+
+  const handleDonate = useCallback(() => {
+    if (!activeAmount) return;
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  }, [activeAmount]);
 
   return (
     <article
