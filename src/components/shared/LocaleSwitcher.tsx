@@ -1,7 +1,6 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "@/navigation";
 import { cn } from "@/lib/utils";
 
 const LOCALES = [
@@ -16,12 +15,17 @@ interface LocaleSwitcherProps {
 
 export default function LocaleSwitcher({ className }: LocaleSwitcherProps) {
   const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
 
   function switchLocale(next: string) {
     if (next === locale) return;
-    router.push(pathname, { locale: next });
+    // Keep locale preference aligned with next-intl when bypassing client router.
+    document.cookie = `NEXT_LOCALE=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
+
+    const { pathname, search, hash } = window.location;
+    const pathWithoutLocale = pathname.replace(/^\/(en|es|ja)(?=\/|$)/, "") || "/";
+    const targetPath = next === "en" ? pathWithoutLocale : `/${next}${pathWithoutLocale}`;
+
+    window.location.href = `${targetPath}${search}${hash}`;
   }
 
   return (
@@ -39,9 +43,7 @@ export default function LocaleSwitcher({ className }: LocaleSwitcherProps) {
           >
             {l.label}
           </button>
-          {i < LOCALES.length - 1 && (
-            <span className="mx-1 select-none text-gray-300">|</span>
-          )}
+          {i < LOCALES.length - 1 && <span className="mx-1 select-none text-gray-300">|</span>}
         </span>
       ))}
     </div>
