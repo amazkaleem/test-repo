@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,14 @@ export default function DonationBox({ className }: DonationBoxProps) {
   const [tab, setTab] = useState<DonationTab>("monthly");
   const [selected, setSelected] = useState<number | null>(DEFAULT_AMOUNT);
   const [custom, setCustom] = useState("");
+  const [isClient, setIsClient] = useState(false);
+  const [isLoadingIframe, setIsLoadingIframe] = useState(false);
+  const [embedAmount, setEmbedAmount] = useState<number | null>(null);
+  const [embedFrequency, setEmbedFrequency] = useState<"one-time" | "monthly" | null>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const selectPreset = useCallback((amount: number) => {
     setSelected(amount);
@@ -33,10 +41,19 @@ export default function DonationBox({ className }: DonationBoxProps) {
 
   const activeAmount = selected ?? (custom ? Number(custom) : null);
   const suffix = tab === "monthly" ? " USD/mo" : " USD";
+  const showIframe = isClient && embedAmount !== null && embedFrequency !== null;
+  const iframeSrc = useMemo(() => {
+    if (!showIframe) return "";
+    const src = new URL("https://giving.gofundme.com/embedded/");
+    src.searchParams.set("cid", "782216");
+    src.searchParams.set("frequency", embedFrequency);
+    src.searchParams.set("amount", String(embedAmount));
+    return src.toString();
+  }, [showIframe, embedFrequency, embedAmount]);
 
   const handleDonate = useCallback(() => {
     if (!activeAmount) return;
-    const frequency = tab === "oneTime" ? "one-time" : "monthly";
+    const frequency: "one-time" | "monthly" = tab === "oneTime" ? "one-time" : "monthly";
     const url = new URL(window.location.href);
 
     url.searchParams.set("campaign", "782216");
@@ -45,7 +62,17 @@ export default function DonationBox({ className }: DonationBoxProps) {
 
     window.history.pushState({}, "", url.toString());
     window.dispatchEvent(new PopStateEvent("popstate"));
+
+    setIsLoadingIframe(true);
+    setEmbedAmount(activeAmount);
+    setEmbedFrequency(frequency);
   }, [activeAmount, tab]);
+
+  useEffect(() => {
+    if (!showIframe) return;
+    const timer = window.setTimeout(() => setIsLoadingIframe(false), 1200);
+    return () => window.clearTimeout(timer);
+  }, [showIframe, iframeSrc]);
 
   return (
     <article
@@ -146,6 +173,24 @@ export default function DonationBox({ className }: DonationBoxProps) {
       >
         {t("cta")}
       </button>
+
+      {(isLoadingIframe || showIframe) && (
+        <div className="mt-5 rounded-lg border border-[#ECEBE5] bg-white p-3">
+          {isLoadingIframe ? (
+            <p className="text-sm text-gray-600">Loading donation form...</p>
+          ) : (
+            <iframe
+              src={iframeSrc}
+              width="100%"
+              height="700"
+              title="GoFundMe donation form"
+              allow="payment *; fullscreen *"
+              loading="lazy"
+              className="w-full rounded-md border-0"
+            />
+          )}
+        </div>
+      )}
     </article>
   );
 }
