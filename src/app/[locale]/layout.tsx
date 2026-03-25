@@ -96,6 +96,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           <main id="main-content">{children}</main>
           <Footer />
         </NextIntlClientProvider>
+        {/* GoFundMe SDK requires this container to validate the installation */}
+        <div className="classy-inline-embed" data-campaign-id="782216" />
       </body>
     </html>
   );

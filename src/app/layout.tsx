@@ -8,7 +8,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Script
           src="https://giving.gofundme.com/embedded/api/sdk/js/38471"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
       </body>
     </html>
