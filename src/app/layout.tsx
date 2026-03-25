@@ -1,8 +1,16 @@
+import Script from "next/script";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html suppressHydrationWarning>
       <head />
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          src="https://giving.gofundme.com/embedded/api/sdk/js/38471"
+          strategy="beforeInteractive"
+        />
+      </body>
     </html>
   );
 }
