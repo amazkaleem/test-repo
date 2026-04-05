@@ -1,19 +1,14 @@
 import Image from "next/image";
 import { Twitter, Facebook, Youtube, Instagram, Mail, Phone, ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SITE_NAV_LINKS } from "@/lib/nav";
+import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 
 const SOCIAL_LINKS = [
   { label: "Twitter / X", href: "https://twitter.com/SHHonduras", Icon: Twitter },
   { label: "Facebook", href: "https://www.facebook.com/studentshelpinghonduras", Icon: Facebook },
   { label: "YouTube", href: "https://www.youtube.com/user/SHHonduras", Icon: Youtube },
   { label: "Instagram", href: "https://www.instagram.com/SHHonduras", Icon: Instagram },
-];
-
-const QUICK_LINKS = [
-  { labelKey: "mission" as const, href: "#pitch-section" },
-  { labelKey: "donate" as const, href: "#donation-section" },
-  { labelKey: "whatsapp" as const, href: "#update-section" },
-  { labelKey: "impact" as const, href: "#impact-section" },
 ];
 
 export default function Footer() {
@@ -36,7 +31,7 @@ export default function Footer() {
                 alt="One Thousand Schools"
                 width={200}
                 height={56}
-                className="h-8 w-auto md:h-14 lg:h-14 object-contain"
+                className="h-8 w-auto md:h-14 object-contain"
               />
             </a>
             <p className="mt-5 max-w-xs font-body text-sm leading-relaxed text-gray-400">
@@ -52,11 +47,15 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="group flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.06] transition-all duration-300 hover:bg-shh-green hover:shadow-[0_0_12px_rgba(47,203,163,0.3)]"
+                  className="group flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.06] transition-all duration-300 hover:bg-shh-yellow hover:shadow-[0_0_12px_rgba(47,203,163,0.3)]"
                 >
                   <Icon className="h-4 w-4 text-gray-400 transition-colors duration-300 group-hover:text-white" />
                 </a>
               ))}
+            </div>
+
+            <div className="mt-8">
+              <LocaleSwitcher />
             </div>
           </div>
 
@@ -66,13 +65,13 @@ export default function Footer() {
               {t("quickLinks")}
             </h3>
             <ul className="mt-4 flex flex-col gap-3">
-              {QUICK_LINKS.map((link) => (
-                <li key={link.labelKey}>
+              {SITE_NAV_LINKS.map((link) => (
+                <li key={link.key}>
                   <a
                     href={link.href}
-                    className="group inline-flex items-center gap-1 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-white"
+                    className="group inline-flex items-center gap-1 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-shh-yellow"
                   >
-                    {tNav(link.labelKey)}
+                    {tNav(link.key)}
                     <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:opacity-100" />
                   </a>
                 </li>
@@ -91,7 +90,7 @@ export default function Footer() {
                   href="mailto:info@shhkids.org"
                   className="group inline-flex items-center gap-2.5 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-white"
                 >
-                  <Mail className="h-3.5 w-3.5 text-shh-green" />
+                  <Mail className="h-3.5 w-3.5 text-shh-yellow" />
                   info@shhkids.org
                 </a>
               </li>
@@ -100,7 +99,7 @@ export default function Footer() {
                   href="mailto:trips@shhkids.org"
                   className="group inline-flex items-center gap-2.5 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-white"
                 >
-                  <Mail className="h-3.5 w-3.5 text-shh-green" />
+                  <Mail className="h-3.5 w-3.5 text-shh-yellow" />
                   trips@shhkids.org
                 </a>
               </li>
@@ -109,7 +108,7 @@ export default function Footer() {
                   href="tel:+16315053745"
                   className="group inline-flex items-center gap-2.5 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-white"
                 >
-                  <Phone className="h-3.5 w-3.5 text-shh-green" />
+                  <Phone className="h-3.5 w-3.5 text-shh-yellow" />
                   +1 631 505 3745
                 </a>
               </li>

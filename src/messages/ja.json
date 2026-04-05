@@ -2,7 +2,8 @@
   "monthlyDonation": {
     "hero": {
       "headline": "すでに111校を建設。",
-      "subheadline": "1,000校の達成にご協力ください。"
+      "subheadline": "1,000 の建設にご協力ください。",
+      "giveToday": "今すぐ寄付"
     },
     "donation": {
       "tabs": {
@@ -19,9 +20,7 @@
       "note": "学校建設をより早く進めます。",
       "cta": "今すぐ参加",
       "progress": {
-        "current": "327",
-        "goal": "1,000",
-        "label": "327 / 1,000",
+        "label": "{count} / {goal}",
         "cta": "1,000人の支援者達成にご協力ください"
       },
       "donationSection": {
@@ -34,12 +33,16 @@
       "subheadline": "ホンジュラスに次の学校を建てる支援ができます"
     },
     "socialProof": {
-      "headline": "327人の支援者が参加中",
+      "headline": "{count}人の支援者が参加中",
       "subheadline": "ホンジュラスで学校建設を支えています"
     },
     "updates": {
       "headline": "Shinとチームからの限定アップデートを受け取ろう",
-      "description": "毎月の寄付者には、WhatsAppを通じてShinとOne Thousand Schoolsチームからの限定の舞台裏アップデート（写真、動画、ストーリーなど）が届きます。あなたが支援しているVilla Soleadaや学校の様子をご覧いただけます。"
+      "description": "毎月の寄付者には、WhatsAppを通じてShinとOne Thousand Schoolsチームからの限定の舞台裏アップデート（写真、動画、ストーリーなど）が届きます。あなたが支援しているVilla Soleadaや学校の様子をご覧いただけます。",
+      "broadcastHeadline": "WhatsAppブロードキャストチャンネルに参加",
+      "broadcastCta": "今すぐ参加",
+      "broadcastOr": "または",
+      "broadcastScan": "QRコードをスキャン"
     },
     "impact": {
       "headline": "支援の成果を見る",
@@ -98,48 +101,11 @@
     "whatsapp": "WhatsAppに参加",
     "menu": "メニュー"
   },
-  "hero": {
-    "headline": "ホンジュラスに1,000校の学校を建設",
-    "subheadline": "教育と若者のエンパワーメントを通じて貧困のサイクルを断ち切るお手伝いをしてください。",
-    "cta": "今すぐ寄付"
-  },
-  "impact": {
-    "heading": "私たちの影響",
-    "villaSoleada": "ビジャ・ソレアダ",
-    "thousandSchools": "1,000校プログラム",
-    "students": "学校の生徒数",
-    "housesBuilt": "建設した住宅数",
-    "jobsCreated": "創出した雇用数",
-    "schoolsBuilt": "建設した学校数",
-    "studentsImpacted": "支援した生徒数",
-    "teachersTrained": "研修を受けた教師数"
-  },
-  "mission": {
-    "heading": "私たちを導くもの",
-    "jobCreation": "雇用創出",
-    "jobCreationDesc": "地域の人々への雇用と研修機会を創出することで、ホンジュラスの高い失業率に取り組んでいます。プログラムディレクター、請負業者、サプライヤーはすべてホンジュラス人です。",
-    "community": "コミュニティの参加",
-    "communityDesc": "村議会や保護者委員会が、学校建設の計画から保守管理まで、始めから終わりまで関与しています。労働力と建設資材を提供します。",
-    "sustainability": "持続可能性",
-    "sustainabilityDesc": "地域のリーダーシップ、政府とのパートナーシップ、収益創出プロジェクトに投資し、プログラムが世代を超えて続くよう取り組んでいます。",
-    "leadership": "地域のリーダーシップ",
-    "leadershipDesc": "教育危機に取り組むために懸命に働いている地域リーダーを支援する役割を担っています。スタッフは連帯して彼らとともに働いています。"
-  },
-  "donate": {
-    "heading": "変化をもたらす",
-    "subheading": "あなたの寄付は、ホンジュラスのコミュニティが教育危機に対処するために必要なリソースを提供するのに役立ちます。"
-  },
-  "whatsapp": {
-    "heading": "WhatsAppブロードキャストに参加",
-    "subheading": "ホンジュラスでの活動に関する最新情報を携帯電話に直接お届けします。",
-    "namePlaceholder": "お名前",
-    "phonePlaceholder": "WhatsApp番号（国番号付き）",
-    "submit": "登録する"
-  },
   "footer": {
     "tagline": "教育と若者のエンパワーメントを通じてホンジュラスの暴力と極度の貧困を軽減します。",
     "quickLinks": "クイックリンク",
     "contact": "お問い合わせ",
+    "language": "言語",
     "followUs": "フォローする",
     "copyright": "Students Helping Honduras. 全著作権所有。",
     "nonprofit": "501(c)(3) 非営利団体"

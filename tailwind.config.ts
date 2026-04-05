@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     container: { center: true, padding: "2rem" },
     fontFamily: {
-      title: ["GT-Walsheim-Bold", "sans-serif"],
-      body: ["GT-Walsheim-Regular", "sans-serif"],
+      title: ["var(--font-title)", "sans-serif"],
+      body: ["var(--font-body)", "sans-serif"],
       quote: ["serif"],
     },
     extend: {
@@ -20,6 +20,8 @@ const config: Config = {
         "shh-green": "#2fcba3",
         "shh-yellow": "#f9c947",
         "shh-black": "#282424",
+        "shh-cream": "#F5F4EF",
+        "shh-muted": "#ECEBE5",
         // ShadCN CSS variable tokens
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -2,7 +2,8 @@
   "monthlyDonation": {
     "hero": {
       "headline": "111 Schools Already Built.",
-      "subheadline": "Help Us Build 1,000."
+      "subheadline": "Help Us Build 1,000.",
+      "giveToday": "Give Today"
     },
     "donation": {
       "tabs": {
@@ -19,9 +20,7 @@
       "note": "Helps build schools faster.",
       "cta": "Join Today",
       "progress": {
-        "current": "327",
-        "goal": "1,000",
-        "label": "327 / 1,000",
+        "label": "{count} / {goal}",
         "cta": "Help us reach 1,000 supporters"
       },
       "donationSection": {
@@ -34,12 +33,16 @@
       "subheadline": "you can help build the next school in Honduras"
     },
     "socialProof": {
-      "headline": "Join 327 supporters",
+      "headline": "Join {count} supporters",
       "subheadline": "already building schools in Honduras"
     },
     "updates": {
       "headline": "Receive exclusive updates from Shin and his team",
-      "description": "Monthly donors receive exclusive behind-the-scenes updates from Shin and the One Thousand Schools Team through WhatsApp — including photos, videos, and stories from Villa Soleada and the schools you're helping build."
+      "description": "Monthly donors receive exclusive behind-the-scenes updates from Shin and the One Thousand Schools Team through WhatsApp — including photos, videos, and stories from Villa Soleada and the schools you're helping build.",
+      "broadcastHeadline": "Join our WhatsApp Broadcast Channel",
+      "broadcastCta": "Join Now",
+      "broadcastOr": "or",
+      "broadcastScan": "Scan QR code"
     },
     "impact": {
       "headline": "See the impact",
@@ -98,48 +101,11 @@
     "whatsapp": "Join WhatsApp",
     "menu": "Menu"
   },
-  "hero": {
-    "headline": "Building 1,000 Schools in Honduras",
-    "subheadline": "Help us break the cycle of poverty through education and youth empowerment.",
-    "cta": "Donate Now"
-  },
-  "impact": {
-    "heading": "Our Impact",
-    "villaSoleada": "Villa Soleada",
-    "thousandSchools": "1,000 Schools Program",
-    "students": "Students at Our School",
-    "housesBuilt": "Houses Built",
-    "jobsCreated": "Jobs Created",
-    "schoolsBuilt": "Schools Built",
-    "studentsImpacted": "Students Impacted",
-    "teachersTrained": "Teachers Trained"
-  },
-  "mission": {
-    "heading": "What Guides Us",
-    "jobCreation": "Job Creation",
-    "jobCreationDesc": "We battle Honduras's high unemployment rate by creating jobs and training opportunities for local nationals. All of our program directors, contractors, and suppliers are Honduran.",
-    "community": "Community Ownership",
-    "communityDesc": "Village councils and parents' committees are involved with our school builds from beginning to end — planning, maintenance, and providing labor and materials.",
-    "sustainability": "Sustainability",
-    "sustainabilityDesc": "We invest in local leadership, government partnerships, and income-generating projects to ensure our programs last for generations.",
-    "leadership": "Local Leadership",
-    "leadershipDesc": "We play a supporting role to community leaders already working heroically to address the education crisis. Our staff work alongside them in solidarity."
-  },
-  "donate": {
-    "heading": "Make a Difference",
-    "subheading": "Your donation helps equip Honduran communities with the resources they need to address the education crisis."
-  },
-  "whatsapp": {
-    "heading": "Join Our WhatsApp Broadcast",
-    "subheading": "Get updates on our work in Honduras directly to your phone.",
-    "namePlaceholder": "Your Name",
-    "phonePlaceholder": "WhatsApp Number (with country code)",
-    "submit": "Sign Up"
-  },
   "footer": {
     "tagline": "Alleviating violence and extreme poverty in Honduras through education and youth empowerment.",
     "quickLinks": "Quick Links",
     "contact": "Contact",
+    "language": "Language",
     "followUs": "Follow Us",
     "copyright": "Students Helping Honduras. All rights reserved.",
     "nonprofit": "501(c)(3) Nonprofit"

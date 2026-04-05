@@ -12,32 +12,20 @@ export default function PitchSection({ videoId = "10jYvPEGtt0" }: PitchSectionPr
   return (
     <SectionWrapper 
       id="pitch-section" 
-      className="bg-[#FFD58A]/90 px-4 py-20 md:px-8 lg:px-16"
+      className="bg-shh-yellow/30"
     >
       <header className="mx-auto mb-10 max-w-3xl text-center">
-        <h2 className="font-title leading-tight text-shh-black
-          text-4xl 
-          sm:text-2xl 
-          md:text-4xl 
-          lg:text-6xl"
-        >
+        <h2 className="section-display-title">
           {t("headline")}
         </h2>
-        <p className="mt-2
-          font-title 
-          text-lg 
-          sm:text-2xl 
-          md:text-2xl  
-          text-shh-black"
-        >
+        <p className="section-display-subtitle">
           {t("subheadline")}
         </p>
       </header>
 
       <VideoCard
         videoId={videoId}
-        title={t("headline")}
-        className="mx-auto max-w-3xl md:border-[35px] border-[#FBB03B]"
+        className="mx-auto max-w-3xl md:border-[35px] border-shh-yellow"
       />
     </SectionWrapper>
   );

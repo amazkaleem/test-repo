@@ -6,6 +6,20 @@ import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { locales, type Locale } from "@/types";
+import localFont from "next/font/local";
+import Script from "next/script";
+
+const fontTitle = localFont({
+  src: "../../../public/fonts/gt-walsheim-bold.ttf",
+  variable: "--font-title",
+  display: "swap",
+});
+
+const fontBody = localFont({
+  src: "../../../public/fonts/gt-walsheim-regular.ttf",
+  variable: "--font-body",
+  display: "swap",
+});
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -75,6 +89,20 @@ export async function generateMetadata({
         "ja-JP": "/ja",
       },
     },
+
+    icons: {
+      icon: [
+        { url: "/favicon/favicon.ico" },
+        { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+      other: [
+        { url: "/favicon/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+        { url: "/favicon/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+      ],
+    },
+    manifest: "/favicon/site.webmanifest",
   };
 }
 
@@ -90,7 +118,13 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body>
+      <head>
+        <Script 
+          src="https://giving.gofundme.com/embedded/api/sdk/js/38471" 
+          strategy="lazyOnload" 
+        />
+      </head>
+      <body className={`${fontTitle.variable} ${fontBody.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main id="main-content">{children}</main>

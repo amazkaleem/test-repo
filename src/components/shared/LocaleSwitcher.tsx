@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 const LOCALES = [
@@ -15,10 +15,10 @@ interface LocaleSwitcherProps {
 
 export default function LocaleSwitcher({ className }: LocaleSwitcherProps) {
   const locale = useLocale();
+  const t = useTranslations("footer");
 
   function switchLocale(next: string) {
     if (next === locale) return;
-    // Keep locale preference aligned with next-intl when bypassing client router.
     document.cookie = `NEXT_LOCALE=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
 
     const { pathname, search, hash } = window.location;
@@ -29,23 +29,31 @@ export default function LocaleSwitcher({ className }: LocaleSwitcherProps) {
   }
 
   return (
-    <div className={cn("flex items-center gap-1", className)}>
-      {LOCALES.map((l, i) => (
-        <span key={l.code} className="flex items-center">
-          <button
-            onClick={() => switchLocale(l.code)}
-            className={cn(
-              "font-body text-sm transition-colors hover:text-shh-green",
-              locale === l.code ? "font-bold text-shh-green" : "text-gray-500"
-            )}
-            aria-label={`Switch language to ${l.label}`}
-            aria-current={locale === l.code ? "true" : undefined}
-          >
-            {l.label}
-          </button>
-          {i < LOCALES.length - 1 && <span className="mx-1 select-none text-gray-300">|</span>}
-        </span>
-      ))}
+    <div className={cn("flex flex-col gap-3", className)}>
+      <h3 className="font-title text-[11px] uppercase tracking-[0.2em] text-gray-500">
+        {t("language")}
+      </h3>
+      <div className="flex items-center gap-2">
+        {LOCALES.map((l) => {
+          const isActive = locale === l.code;
+          return (
+            <button
+              key={l.code}
+              onClick={() => switchLocale(l.code)}
+              className={cn(
+                "rounded-full px-3 py-1.5 font-body text-xs font-semibold transition-all duration-200",
+                isActive
+                  ? "bg-shh-yellow text-shh-black"
+                  : "bg-white/[0.06] text-gray-400 hover:bg-white/[0.1] hover:text-white"
+              )}
+              aria-label={`Switch language to ${l.label}`}
+              aria-current={isActive ? "true" : undefined}
+            >
+              {l.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

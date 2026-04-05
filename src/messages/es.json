@@ -2,7 +2,8 @@
   "monthlyDonation": {
     "hero": {
       "headline": "111 escuelas ya construidas.",
-      "subheadline": "Ayúdanos a construir 1,000."
+      "subheadline": "Ayúdanos a construir 1,000.",
+      "giveToday": "Dona Hoy"
     },
     "donation": {
       "tabs": {
@@ -19,9 +20,7 @@
       "note": "Ayuda a construir escuelas más rápido.",
       "cta": "Únete hoy",
       "progress": {
-        "current": "327",
-        "goal": "1,000",
-        "label": "327 / 1,000",
+        "label": "{count} / {goal}",
         "cta": "Ayúdanos a llegar a 1,000 personas"
       },
       "donationSection": {
@@ -34,12 +33,16 @@
       "subheadline": "puedes ayudar a construir la próxima escuela en Honduras"
     },
     "socialProof": {
-      "headline": "Únete a 327 personas",
+      "headline": "Únete a {count} personas",
       "subheadline": "que ya están construyendo escuelas en Honduras"
     },
     "updates": {
       "headline": "Recibe actualizaciones exclusivas de Shin y su equipo",
-      "description": "Los donantes mensuales reciben actualizaciones exclusivas detrás de escena del equipo de One Thousand Schools a través de WhatsApp, incluyendo fotos, videos e historias de Villa Soleada y de las escuelas que estás ayudando a construir."
+      "description": "Los donantes mensuales reciben actualizaciones exclusivas detrás de escena del equipo de One Thousand Schools a través de WhatsApp, incluyendo fotos, videos e historias de Villa Soleada y de las escuelas que estás ayudando a construir.",
+      "broadcastHeadline": "Únete a nuestro canal de difusión de WhatsApp",
+      "broadcastCta": "Unirse Ahora",
+      "broadcastOr": "o",
+      "broadcastScan": "Escanea el código QR"
     },
     "impact": {
       "headline": "Mira el impacto",
@@ -99,48 +102,11 @@
     "whatsapp": "Únete a WhatsApp",
     "menu": "Menú"
   },
-  "hero": {
-    "headline": "Construyendo 1,000 Escuelas en Honduras",
-    "subheadline": "Ayúdanos a romper el ciclo de la pobreza a través de la educación y el empoderamiento juvenil.",
-    "cta": "Donar Ahora"
-  },
-  "impact": {
-    "heading": "Nuestro Impacto",
-    "villaSoleada": "Villa Soleada",
-    "thousandSchools": "Programa 1,000 Escuelas",
-    "students": "Estudiantes en Nuestra Escuela",
-    "housesBuilt": "Casas Construidas",
-    "jobsCreated": "Empleos Creados",
-    "schoolsBuilt": "Escuelas Construidas",
-    "studentsImpacted": "Estudiantes Impactados",
-    "teachersTrained": "Maestros Capacitados"
-  },
-  "mission": {
-    "heading": "Lo Que Nos Guía",
-    "jobCreation": "Creación de Empleo",
-    "jobCreationDesc": "Combatimos la alta tasa de desempleo de Honduras creando empleos y oportunidades de capacitación para los locales. Todos nuestros directores de programas, contratistas y proveedores son hondureños.",
-    "community": "Participación Comunitaria",
-    "communityDesc": "Los consejos de aldea y los comités de padres participan en la construcción de nuestras escuelas de principio a fin: planificación, mantenimiento y aportando mano de obra y materiales.",
-    "sustainability": "Sostenibilidad",
-    "sustainabilityDesc": "Invertimos en liderazgo local, alianzas gubernamentales y proyectos generadores de ingresos para garantizar que nuestros programas duren generaciones.",
-    "leadership": "Liderazgo Local",
-    "leadershipDesc": "Desempeñamos un papel de apoyo a los líderes comunitarios que ya trabajan heroicamente para abordar la crisis educativa. Nuestro personal trabaja junto a ellos en solidaridad."
-  },
-  "donate": {
-    "heading": "Haz la Diferencia",
-    "subheading": "Tu donación ayuda a equipar a las comunidades hondureñas con los recursos que necesitan para enfrentar la crisis educativa."
-  },
-  "whatsapp": {
-    "heading": "Únete a Nuestra Transmisión de WhatsApp",
-    "subheading": "Recibe actualizaciones sobre nuestro trabajo en Honduras directamente en tu teléfono.",
-    "namePlaceholder": "Tu Nombre",
-    "phonePlaceholder": "Número de WhatsApp (con código de país)",
-    "submit": "Registrarse"
-  },
   "footer": {
     "tagline": "Aliviando la violencia y la pobreza extrema en Honduras a través de la educación y el empoderamiento juvenil.",
     "quickLinks": "Enlaces Rápidos",
     "contact": "Contacto",
+    "language": "Idioma",
     "followUs": "Síguenos",
     "copyright": "Students Helping Honduras. Todos los derechos reservados.",
     "nonprofit": "Organización sin fines de lucro 501(c)(3)"
