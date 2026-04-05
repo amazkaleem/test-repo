@@ -20,30 +20,30 @@ const processedEventIds = new Map<string, number>();
  * Security: Validate Webhook Secret & Payload Integrity
  * Implements Svix signature verification as required by GoFundMe Pro
  */
-// function verifySvixSignature(
-//   rawBody: string,
-//   signature: string,
-//   eventId: string,
-//   timestamp: string,
-//   secret: string
-// ): boolean {
-//   const signedContent = `${eventId}.${timestamp}.${rawBody}`;
-//   // Extract the base64 part of the secret (Svix secrets often prefixed with whsec_)
-//   const secretPart = secret.includes("_") ? secret.split("_")[1] : secret;
-//   const secretBytes = Buffer.from(secretPart, "base64");
+function verifySvixSignature(
+  rawBody: string,
+  signature: string,
+  eventId: string,
+  timestamp: string,
+  secret: string
+): boolean {
+  const signedContent = `${eventId}.${timestamp}.${rawBody}`;
+  // Extract the base64 part of the secret (Svix secrets often prefixed with whsec_)
+  const secretPart = secret.includes("_") ? secret.split("_")[1] : secret;
+  const secretBytes = Buffer.from(secretPart, "base64");
 
-//   const expectedSignature = createHmac("sha256", secretBytes)
-//     .update(signedContent)
-//     .digest("base64");
+  const expectedSignature = createHmac("sha256", secretBytes)
+    .update(signedContent)
+    .digest("base64");
 
-//   const parts = signature.split(",");
-//   if (parts.length !== 2) return false;
+  const parts = signature.split(",");
+  if (parts.length !== 2) return false;
 
-//   const providedSig = Buffer.from(parts[1], "base64");
-//   const expectedSigBuffer = Buffer.from(expectedSignature, "base64");
+  const providedSig = Buffer.from(parts[1], "base64");
+  const expectedSigBuffer = Buffer.from(expectedSignature, "base64");
 
-//   return timingSafeEqual(providedSig, expectedSigBuffer);
-// }
+  return timingSafeEqual(providedSig, expectedSigBuffer);
+}
 
 /**
  * Best Practice: Handle Retries Gracefully (Idempotency)
@@ -80,15 +80,15 @@ export async function POST(request: NextRequest) {
   const timestamp = request.headers.get(TIMESTAMP_HEADER);
   const eventId = request.headers.get(EVENT_ID_HEADER);
 
-  if (!eventId) {
-    return NextResponse.json({ error: "Please provide an event Id!" }, { status: 400 });
-  }
-
   // Security: Verify payload authenticity
-  // if ( !signature || !timestamp || !eventId || !verifySvixSignature(rawBody, signature, eventId, timestamp, WEBHOOK_SECRET))
-  // {
-  //   return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
-  // }
+  if (
+    !signature ||
+    !timestamp ||
+    !eventId ||
+    !verifySvixSignature(rawBody, signature, eventId, timestamp, WEBHOOK_SECRET)
+  ) {
+    return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+  }
 
   const payload = JSON.parse(rawBody) as TransactionWebhookPayload;
   const eventType = payload.eventType;
