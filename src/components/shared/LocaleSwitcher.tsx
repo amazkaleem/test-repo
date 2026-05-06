@@ -1,12 +1,13 @@
 "use client";
 
+import { ChevronDown, Globe } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 const LOCALES = [
   { code: "en", label: "EN" },
   { code: "es", label: "ES" },
-  { code: "ja", label: "日本語" },
+  { code: "ja", label: "JA" },
 ];
 
 interface LocaleSwitcherProps {
@@ -15,7 +16,9 @@ interface LocaleSwitcherProps {
 
 export default function LocaleSwitcher({ className }: LocaleSwitcherProps) {
   const locale = useLocale();
-  const t = useTranslations("footer");
+  const t = useTranslations("nav");
+  const currentLocaleLabel =
+    LOCALES.find((item) => item.code === locale)?.label ?? locale.toUpperCase();
 
   function switchLocale(next: string) {
     if (next === locale) return;
@@ -29,31 +32,28 @@ export default function LocaleSwitcher({ className }: LocaleSwitcherProps) {
   }
 
   return (
-    <div className={cn("flex flex-col gap-3", className)}>
-      <h3 className="font-title text-[11px] uppercase tracking-[0.2em] text-gray-500">
-        {t("language")}
-      </h3>
-      <div className="flex items-center gap-2">
-        {LOCALES.map((l) => {
-          const isActive = locale === l.code;
-          return (
-            <button
-              key={l.code}
-              onClick={() => switchLocale(l.code)}
-              className={cn(
-                "rounded-full px-3 py-1.5 font-body text-xs font-semibold transition-all duration-200",
-                isActive
-                  ? "bg-shh-yellow text-shh-black"
-                  : "bg-white/[0.06] text-gray-400 hover:bg-white/[0.1] hover:text-white"
-              )}
-              aria-label={`Switch language to ${l.label}`}
-              aria-current={isActive ? "true" : undefined}
-            >
-              {l.label}
-            </button>
-          );
-        })}
-      </div>
-    </div>
+    <label
+      className={cn(
+        "relative inline-flex items-center gap-1 rounded-full px-2 py-1 font-body text-sm text-shh-black transition-colors duration-200 hover:bg-shh-black/[0.05]",
+        className
+      )}
+    >
+      <Globe className="h-4 w-4 text-shh-black/80" aria-hidden="true" />
+      <span aria-hidden="true">{currentLocaleLabel}</span>
+      <ChevronDown className="h-3.5 w-3.5 text-shh-black/70" aria-hidden="true" />
+
+      <select
+        value={locale}
+        onChange={(event) => switchLocale(event.target.value)}
+        className="absolute inset-0 cursor-pointer appearance-none rounded-full opacity-0"
+        aria-label={t("language")}
+      >
+        {LOCALES.map((item) => (
+          <option key={item.code} value={item.code}>
+            {item.label}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }

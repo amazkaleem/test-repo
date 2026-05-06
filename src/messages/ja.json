@@ -26,6 +26,12 @@
       "donationSection": {
         "headline": "毎月の寄付者になる",
         "cancelNote": "いつでも解約できます。"
+      },
+      "fallback": {
+        "heading": "寄付フォームエラー",
+        "description": "フォームの読み込みに問題が発生しています",
+        "subdescription": "GoFundMeのキャンペーンページから直接寄付することもできます。",
+        "cta": "GoFundMeで寄付する"
       }
     },
     "pitch": {
@@ -38,7 +44,9 @@
     },
     "updates": {
       "headline": "Shinとチームからの限定アップデートを受け取ろう",
-      "description": "毎月の寄付者には、WhatsAppを通じてShinとOne Thousand Schoolsチームからの限定の舞台裏アップデート（写真、動画、ストーリーなど）が届きます。あなたが支援しているVilla Soleadaや学校の様子をご覧いただけます。",
+      "description": "寄付者は、あなたが支援している学校やビラ・ソレアダからの写真、ビデオ、ストーリーなど、シンとOne Thousand Schoolsチームからの舞台裏の限定情報をWhatsAppで受け取ることができます。寄付の後、建設現場からのライブ更新を共有するWhatsAppのプライベートブロードキャストに招待されます。",
+      "imageDay1Alt": "1日目 — 学校の建設が始まる",
+      "imageDay68Alt": "68日目 — 学校がほぼ完成",
       "broadcastHeadline": "WhatsAppブロードキャストチャンネルに参加",
       "broadcastCta": "今すぐ参加",
       "broadcastOr": "または",
@@ -74,7 +82,7 @@
         },
         {
           "question": "寄付の影響はどのように確認できますか？",
-          "answer": "学校建設の進捗やコミュニティへの影響について、写真や動画を含む最新情報を定期的に共有しています。メールやWhatsAppで受け取ることができます。"
+          "answer": "学校建設の進捗状況、コミュニティへの影響、そしてヴィラ・ソレアダでの出来事に関する最新情報、写真、動画を定期的に共有しています。寄付をすると、WhatsAppブロードキャストへの招待が届き、これらの更新情報が直接配信されます。"
         },
         {
           "question": "提案された金額以上に寄付できますか？",
@@ -92,6 +100,23 @@
     },
     "social": {
       "headline": "活動をフォローする"
+    },
+    "whatsappModal": {
+      "title": "あと少しです \u2014 WhatsAppの更新情報を受け取るために私たちの番号を保存してください！",
+      "description": "あなたが支援しているプロジェクトのリアルタイムな更新、動画、進捗情報を受け取るには、必ず私たちの番号を保存してWhatsAppリストに参加してください。",
+      "ourNumber": "私たちのWhatsApp番号",
+      "saveVcfTitle": "連絡先を保存 (VCF)",
+      "saveVcfDesc": "ダウンロードして連絡先に追加",
+      "copyNumberTitle": "番号をコピー",
+      "copyNumberDesc": "この番号をクリップボードにコピー",
+      "chatAction": "WhatsAppでチャット",
+      "chatDesc": "この番号とのチャットを開始",
+      "or": "または",
+      "useLink": "このリンクを使用：",
+      "copyLink": "リンクをコピー",
+      "copied": "コピーしました",
+      "close": "閉じる",
+      "prefill": "こんにちは、更新情報を受け取りたいです！"
     }
   },
   "nav": {
@@ -99,15 +124,22 @@
     "mission": "私たちの使命",
     "impact": "私たちの影響",
     "whatsapp": "WhatsAppに参加",
+    "faq": "よくある質問",
+    "language": "言語",
     "menu": "メニュー"
   },
   "footer": {
     "tagline": "教育と若者のエンパワーメントを通じてホンジュラスの暴力と極度の貧困を軽減します。",
     "quickLinks": "クイックリンク",
     "contact": "お問い合わせ",
-    "language": "言語",
     "followUs": "フォローする",
     "copyright": "Students Helping Honduras. 全著作権所有。",
     "nonprofit": "501(c)(3) 非営利団体"
+  },
+  "metadata": {
+    "site_name": "One Thousand Schools",
+    "default_title": "One Thousand Schools — ホンジュラスの教育",
+    "description": "One Thousand Schoolsはホンジュラスの農村地域に学校を建設し、教育を通じて貧困の連鎖を断ち切るために教師を訓練しています。",
+    "keywords": "ホンジュラス,教育,非営利団体,寄付,学校,One Thousand Schools,Students Helping Honduras"
   }
 }

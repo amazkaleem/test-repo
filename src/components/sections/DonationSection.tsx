@@ -1,16 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import DonationBox from "../shared/DonationBox";
 import SectionWrapper from "../shared/SectionWrapper";
 
-const DEFAULT_SUPPORTERS = 327;
 const GOAL_SUPPORTERS = 1000;
+const COUNT_UP_MS = 1600;
+
+function useCountUp(target: number, triggerRef: React.RefObject<HTMLElement | null>, durationMs = COUNT_UP_MS) {
+  const [display, setDisplay] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const el = triggerRef.current;
+    if (!el || target <= 0) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAnimated.current) return;
+        hasAnimated.current = true;
+        observer.disconnect();
+
+        const start = performance.now();
+        function tick(now: number) {
+          const progress = Math.min((now - start) / durationMs, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setDisplay(Math.round(eased * target));
+          if (progress < 1) {
+            rafRef.current = requestAnimationFrame(tick);
+          }
+        }
+        rafRef.current = requestAnimationFrame(tick);
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, [target, triggerRef, durationMs]);
+
+  return display;
+}
 
 export default function DonationSection() {
   const t = useTranslations("monthlyDonation");
-  const [supportersCount, setSupportersCount] = useState(DEFAULT_SUPPORTERS);
+  const [supportersCount, setSupportersCount] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const displayCount = useCountUp(supportersCount, sectionRef);
 
   useEffect(() => {
     async function loadSupportersCount() {
@@ -32,20 +74,19 @@ export default function DonationSection() {
           setSupportersCount(data.count);
         }
       } catch {
-        // Keep fallback count when API is unavailable.
-        setSupportersCount(DEFAULT_SUPPORTERS);
+        /* keep at 0 when API is unavailable */
       }
     }
 
     loadSupportersCount();
   }, []);
 
-  const progressPercent = Math.min((supportersCount / GOAL_SUPPORTERS) * 100, 100);
-  const formattedSupporters = supportersCount.toLocaleString();
+  const progressPercent = Math.min((displayCount / GOAL_SUPPORTERS) * 100, 100);
+  const formattedSupporters = displayCount.toLocaleString();
   const formattedGoal = GOAL_SUPPORTERS.toLocaleString();
 
   return (
-    <SectionWrapper id="donation-section" className="bg-[#F5F4EF]">
+    <SectionWrapper ref={sectionRef} id="donation-section" className="bg-[#F5F4EF]">
       <div className="mx-auto max-w-3xl text-center">
         {/* Social-proof headline */}
         <h2 className="section-display-title">
@@ -75,7 +116,7 @@ export default function DonationSection() {
         </div>
 
         {/* "Become a monthly donor" headline */}
-        <h3 className="mt-6 font-title text-4xl font-bold leading-tight text-shh-black sm:text-2xl md:text-4xl lg:text-6xl">
+        <h3 className="section-display-title mt-6">
           {t("donation.donationSection.headline")}
         </h3>
 

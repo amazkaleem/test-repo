@@ -68,11 +68,11 @@
 
 @layer components {
     .section-display-title {
-        @apply font-title leading-tight text-shh-black text-4xl sm:text-2xl md:text-4xl lg:text-6xl;
+        @apply font-title leading-tight text-shh-black text-2xl sm:text-3xl md:text-4xl lg:text-6xl;
     }
 
     .section-display-subtitle {
-        @apply mt-2 font-title text-lg sm:text-2xl md:text-2xl text-shh-black;
+        @apply mt-2 font-title text-shh-black text-lg sm:text-2xl;
     }
 }
 

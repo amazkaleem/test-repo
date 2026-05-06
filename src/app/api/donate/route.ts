@@ -11,15 +11,14 @@ const SUPPORTED_EVENTS = new Set(["transaction.created"]);
 const SIGNATURE_HEADER = "svix-signature";
 const EVENT_ID_HEADER = "svix-id";
 const TIMESTAMP_HEADER = "svix-timestamp";
+/** Reject webhooks whose svix-timestamp is too far from now (limits replay of captured requests). */
+const MAX_TIMESTAMP_SKEW_SECONDS = 5 * 60;
 const IDEMPOTENCY_TTL_MS = 1000 * 60 * 60 * 24;
 
 // In-memory idempotency cache
 const processedEventIds = new Map<string, number>();
 
-/**
- * Security: Validate Webhook Secret & Payload Integrity
- * Implements Svix signature verification as required by GoFundMe Pro
- */
+// Validate Svix webhook signature
 function verifySvixSignature(
   rawBody: string,
   signature: string,
@@ -36,18 +35,33 @@ function verifySvixSignature(
     .update(signedContent)
     .digest("base64");
 
-  const parts = signature.split(",");
-  if (parts.length !== 2) return false;
-
-  const providedSig = Buffer.from(parts[1], "base64");
   const expectedSigBuffer = Buffer.from(expectedSignature, "base64");
+  if (expectedSigBuffer.length === 0) return false;
 
-  return timingSafeEqual(providedSig, expectedSigBuffer);
+  // Svix may send several space-separated entries, each like "v1,<base64_hmac>".
+  const entries = signature.trim().split(/\s+/).filter(Boolean);
+  for (const entry of entries) {
+    const commaIdx = entry.indexOf(",");
+    if (commaIdx <= 0) continue;
+    const version = entry.slice(0, commaIdx);
+    const encodedSig = entry.slice(commaIdx + 1);
+    if (version !== "v1") continue;
+
+    const providedSig = Buffer.from(encodedSig, "base64");
+    if (providedSig.length !== expectedSigBuffer.length) continue;
+    if (timingSafeEqual(providedSig, expectedSigBuffer)) return true;
+  }
+
+  return false;
 }
 
-/**
- * Best Practice: Handle Retries Gracefully (Idempotency)
- */
+function isWebhookTimestampFresh(timestampHeader: string): boolean {
+  const ts = Number.parseInt(timestampHeader, 10);
+  if (!Number.isFinite(ts) || ts <= 0) return false;
+  const nowSec = Math.floor(Date.now() / 1000);
+  return Math.abs(nowSec - ts) <= MAX_TIMESTAMP_SKEW_SECONDS;
+}
+
 function hasEventBeenProcessed(eventId: string): boolean {
   const lastSeen = processedEventIds.get(eventId);
   if (!lastSeen) return false;
@@ -58,17 +72,9 @@ function hasEventBeenProcessed(eventId: string): boolean {
   return true;
 }
 
-/**
- * Logic for Transaction Created
- * This is where you would "Update Fundraising Thermometers"
- */
-async function handleTransactionCreated(payload: TransactionWebhookPayload) {
-  const transaction = payload.data;
-  console.info("[webhook] Processing transaction:", transaction);
-
-  // LOGIC: Send immediate thank-you messages
-  // Example: await sendEmail(transaction.email, "Thank you!");
-}
+// TODO: implement side-effects (e.g. update supporter count in DB) once a persistent store is in place
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function handleTransactionCreated(payload: TransactionWebhookPayload) {}
 
 export async function POST(request: NextRequest) {
   if (!WEBHOOK_SECRET) {
@@ -80,23 +86,29 @@ export async function POST(request: NextRequest) {
   const timestamp = request.headers.get(TIMESTAMP_HEADER);
   const eventId = request.headers.get(EVENT_ID_HEADER);
 
-  // Security: Verify payload authenticity
-  if (
-    !signature ||
-    !timestamp ||
-    !eventId ||
-    !verifySvixSignature(rawBody, signature, eventId, timestamp, WEBHOOK_SECRET)
-  ) {
+  if (!signature || !timestamp || !eventId) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
-  const payload = JSON.parse(rawBody) as TransactionWebhookPayload;
+  if (!isWebhookTimestampFresh(timestamp)) {
+    return NextResponse.json({ error: "Invalid or expired webhook timestamp" }, { status: 401 });
+  }
+
+  if (!verifySvixSignature(rawBody, signature, eventId, timestamp, WEBHOOK_SECRET)) {
+    return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+  }
+
+  let payload: TransactionWebhookPayload;
+  try {
+    payload = JSON.parse(rawBody) as TransactionWebhookPayload;
+  } catch (err) {
+    console.error("[webhook] Failed to parse webhook body as JSON:", err);
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
   const eventType = payload.eventType;
 
-  // Best Practice: Log all deliveries
-  console.info(`[webhook] Received ${eventType}`, { eventId });
 
-  // Best Practice: Implement idempotent processing
   if (hasEventBeenProcessed(eventId)) {
     return NextResponse.json({ duplicate: true }, { status: 200 });
   }
@@ -105,14 +117,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ignored: true }, { status: 200 });
   }
 
-  /**
-   * Security Recommendation: Respond Promptly (within 15s)
-   * We return 202 and process the business logic in the "background"
-   */
   if (ACK_IMMEDIATELY) {
     processedEventIds.set(eventId, Date.now());
-
-    // Background processing
     void handleTransactionCreated(payload).catch((err) =>
       console.error("[webhook] Async Error:", err)
     );
@@ -120,7 +126,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ accepted: true }, { status: 202 });
   }
 
-  // Fallback for synchronous processing
   try {
     await handleTransactionCreated(payload);
     processedEventIds.set(eventId, Date.now());

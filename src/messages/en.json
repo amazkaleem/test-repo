@@ -26,6 +26,12 @@
       "donationSection": {
         "headline": "Become a monthly donor",
         "cancelNote": "Cancel anytime."
+      },
+      "fallback": {
+        "heading": "Donation Form Error",
+        "description": "We\u2019re having trouble loading the form",
+        "subdescription": "You can still donate directly through our GoFundMe campaign page.",
+        "cta": "Donate on GoFundMe"
       }
     },
     "pitch": {
@@ -38,7 +44,9 @@
     },
     "updates": {
       "headline": "Receive exclusive updates from Shin and his team",
-      "description": "Monthly donors receive exclusive behind-the-scenes updates from Shin and the One Thousand Schools Team through WhatsApp — including photos, videos, and stories from Villa Soleada and the schools you're helping build.",
+      "description": "Donors will receive exclusive behind-the-scenes updates from Shin and the One Thousand Schools Team via WhatsApp, including photos, videos, and stories from Villa Soleada and the schools you're helping build. After donating, you'll be invited to join a private WhatsApp broadcast where we share live updates directly from the construction sites.",
+      "imageDay1Alt": "Day 1 — school construction begins",
+      "imageDay68Alt": "Day 68 — school almost finished",
       "broadcastHeadline": "Join our WhatsApp Broadcast Channel",
       "broadcastCta": "Join Now",
       "broadcastOr": "or",
@@ -74,7 +82,7 @@
         },
         {
           "question": "How can I see the impact of my donation?",
-          "answer": "We regularly share updates, photos, and videos about the progress of school construction and the impact on communities. You can choose to receive updates by email or through WhatsApp messages."
+          "answer": "We regularly share updates, photos, and videos on the progress of school construction, its impact on communities, and what’s happening at Villa Soleada. When you donate, you’ll receive an invitation to join our WhatsApp broadcast, where these updates are delivered directly to you."
         },
         {
           "question": "Can I donate more than the suggested amounts?",
@@ -92,6 +100,23 @@
     },
     "social": {
       "headline": "Follow the journey"
+    },
+    "whatsappModal": {
+      "title": "Almost done \u2014 save our number to get WhatsApp updates!",
+      "description": "You MUST save our number to join our WhatsApp list to receive real-time updates, videos, and progress from the projects you\u2019re helping build.",
+      "ourNumber": "Our WhatsApp number",
+      "saveVcfTitle": "Save Contact (VCF)",
+      "saveVcfDesc": "Download and open to add to your contacts",
+      "copyNumberTitle": "Copy Number",
+      "copyNumberDesc": "Copy this number to your clipboard",
+      "chatAction": "Chat with us on WhatsApp",
+      "chatDesc": "Starts a chat with this number",
+      "or": "OR",
+      "useLink": "Use this link",
+      "copyLink": "Copy Link",
+      "copied": "Copied!",
+      "close": "Close",
+      "prefill": "Hello, I would like to receive updates!"
     }
   },
   "nav": {
@@ -99,15 +124,23 @@
     "mission": "Our Mission",
     "impact": "Our Impact",
     "whatsapp": "Join WhatsApp",
-    "menu": "Menu"
+    "faq": "FAQ",
+    "menu": "Menu",
+    "language": "Language"
+
   },
   "footer": {
     "tagline": "Alleviating violence and extreme poverty in Honduras through education and youth empowerment.",
     "quickLinks": "Quick Links",
     "contact": "Contact",
-    "language": "Language",
     "followUs": "Follow Us",
     "copyright": "Students Helping Honduras. All rights reserved.",
     "nonprofit": "501(c)(3) Nonprofit"
+  },
+  "metadata": {
+    "site_name": "One Thousand Schools",
+    "default_title": "One Thousand Schools — Education in Honduras",
+    "description": "One Thousand Schools builds schools across rural Honduras and trains teachers to break the cycle of poverty through education.",
+    "keywords": "Honduras,education,nonprofit,donate,schools,One Thousand Schools,Students Helping Honduras"
   }
 }

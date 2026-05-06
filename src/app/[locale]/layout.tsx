@@ -1,37 +1,22 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import "../globals.css";
+import { getMessages, getTranslations } from "next-intl/server";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { locales, type Locale } from "@/types";
-import localFont from "next/font/local";
 import Script from "next/script";
-
-const fontTitle = localFont({
-  src: "../../../public/fonts/gt-walsheim-bold.ttf",
-  variable: "--font-title",
-  display: "swap",
-});
-
-const fontBody = localFont({
-  src: "../../../public/fonts/gt-walsheim-regular.ttf",
-  variable: "--font-body",
-  display: "swap",
-});
+import GlobalWhatsAppModal from "@/components/shared/GlobalWhatsAppModal";
+import { MobileDonationModalProvider } from "@/components/shared/MobileDonationModalContext";
 
 interface LocaleLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
   params: { locale: string };
 }
 
 const BASE_URL = "https://www.shhkids.org";
 
-const DESCRIPTION =
-  "One Thousand Schools builds schools across rural Honduras and trains teachers to break the cycle of poverty through education.";
-
-// Locale → Open Graph locale format
 const OG_LOCALE_MAP: Record<Locale, string> = {
   en: "en_US",
   es: "es_ES",
@@ -44,41 +29,34 @@ export async function generateMetadata({
   params: { locale: string };
 }): Promise<Metadata> {
   const locale = params.locale as Locale;
+  const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
     metadataBase: new URL(BASE_URL),
 
     title: {
-      template: "%s | One Thousand Schools",
-      default: "One Thousand Schools — Education in Honduras",
+      template: `%s | ${t("site_name")}`,
+      default: t("default_title"),
     },
-    description: DESCRIPTION,
-    keywords: [
-      "Honduras",
-      "education",
-      "nonprofit",
-      "donate",
-      "schools",
-      "One Thousand Schools",
-      "Students Helping Honduras",
-    ],
+    description: t("description"),
+    keywords: t("keywords").split(","),
 
     openGraph: {
       type: "website",
-      siteName: "One Thousand Schools",
+      siteName: t("site_name"),
       locale: OG_LOCALE_MAP[locale] ?? "en_US",
-      url: locale === "en" ? BASE_URL : `${BASE_URL}/${locale}`,
-      title: "One Thousand Schools — Education in Honduras",
-      description: DESCRIPTION,
-      images: [{ url: "/og-image.jpg", width: 1200, height: 630 }], // TODO: add real 1200×630 image to /public/og-image.jpg
+      alternateLocale: Object.values(OG_LOCALE_MAP).filter((l) => l !== OG_LOCALE_MAP[locale]),
+      title: t("default_title"),
+      description: t("description"),
+      images: [{ url: "/images/og-image.jpg", width: 1200, height: 630 }],
     },
 
     twitter: {
       card: "summary_large_image",
       site: "@SHHonduras",
-      title: "One Thousand Schools — Education in Honduras",
-      description: DESCRIPTION,
-      images: ["/og-image.jpg"],
+      title: t("default_title"),
+      description: t("description"),
+      images: ["/images/og-image.jpg"],
     },
 
     alternates: {
@@ -113,31 +91,28 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound();
   }
 
-  // Load translations server-side
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <Script 
-          src="https://giving.gofundme.com/embedded/api/sdk/js/38471" 
-          strategy="lazyOnload" 
-        />
-      </head>
-      <body className={`${fontTitle.variable} ${fontBody.variable}`}>
-        <NextIntlClientProvider messages={messages}>
+    <>
+      <Script
+        src="https://giving.gofundme.com/embedded/api/sdk/js/38471"
+        strategy="lazyOnload"
+      />
+      <NextIntlClientProvider messages={messages}>
+        <MobileDonationModalProvider>
           <Header />
           <main id="main-content">{children}</main>
           <Footer />
-        </NextIntlClientProvider>
-        {/* GoFundMe SDK requires this container to validate the installation */}
-        <div className="classy-inline-embed" data-campaign-id="782216" />
-      </body>
-    </html>
+          <GlobalWhatsAppModal />
+        </MobileDonationModalProvider>
+      </NextIntlClientProvider>
+      {/* GoFundMe SDK requires this container to validate the installation */}
+      <div className="classy-inline-embed" data-campaign-id="782216" />
+    </>
   );
 }
 
-// Pre-render all 3 locale variants at build time
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }

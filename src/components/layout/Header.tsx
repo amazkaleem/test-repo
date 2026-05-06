@@ -3,12 +3,16 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Menu, X, Heart } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SITE_NAV_LINKS } from "@/lib/nav";
+import { useMobileDonationModal } from "@/components/shared/MobileDonationModalContext";
+import { DonateDrawerTriggerButton, DonateSectionLink } from "@/components/ui/donate-section-link";
+import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 
 export default function Header() {
   const t = useTranslations("nav");
+  const { open: openMobileDonationModal } = useMobileDonationModal();
   const [navOpen, setNavOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -83,6 +87,7 @@ export default function Header() {
             priority
             sizes="(max-width: 768px) 150px, 200px"
             className="h-8 w-auto object-contain md:h-14"
+            style={{ width: "auto" }}
           />
         </a>
 
@@ -97,7 +102,7 @@ export default function Header() {
                 className={cn(
                   "relative rounded-full px-4 py-1.5 font-body text-[13px] font-medium transition-all duration-300",
                   isActive
-                    ? "bg-shh-yellow text-shh-black"
+                    ? "bg-shh-yellow text-shh-black font-bold"
                     : "text-shh-black hover:font-bold"
                 )}
               >
@@ -109,14 +114,11 @@ export default function Header() {
           {/* End Desktop nav links */}
         </nav>
 
-        {/* Desktop CTA */}
-        <a
-          href="#donation-section"
-          className="group hidden items-center gap-1.5 rounded-full bg-shh-yellow px-5 py-2 font-body text-sm font-bold text-shh-black shadow-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_4px_16px_rgba(249,201,71,0.35)] active:scale-[0.97] md:inline-flex"
-        >
-          <Heart className="h-3.5 w-3.5 transition-transform duration-300 group-hover:scale-110" fill="currentColor" />
-          {t("donate")}
-        </a>
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-2 md:flex">
+          <LocaleSwitcher />
+          <DonateSectionLink variant="header">{t("donate")}</DonateSectionLink>
+        </div>
 
         {/* Mobile menu trigger */}
         <button
@@ -151,6 +153,7 @@ export default function Header() {
               width={130}
               height={38}
               className="h-8 w-auto object-contain"
+              style={{ width: "auto" }}
             />
           </a>
           <button
@@ -178,16 +181,18 @@ export default function Header() {
             </a>
           ))}
 
+          <LocaleSwitcher className="mt-4" />
+
           <div className="my-4 h-px w-12 bg-gray-200" />
 
-          <a
-            href="#donation-section"
-            onClick={closeNav}
-            className="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-shh-yellow py-4 font-title text-xl text-shh-black shadow-[0_4px_16px_rgba(249,201,71,0.25)] transition-all duration-300 active:scale-[0.97] hover:brightness-110"
+          <DonateDrawerTriggerButton
+            onClick={() => {
+              closeNav();
+              openMobileDonationModal();
+            }}
           >
-            <Heart className="h-5 w-5" fill="currentColor" />
             {t("donate")}
-          </a>
+          </DonateDrawerTriggerButton>
         </nav>
       </div>
     </>

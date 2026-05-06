@@ -2,22 +2,24 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
+import heroPoster from "../../../public/images/hero-poster.webp";
+import mobileBg from "../../../public/images/mobile-bg.webp";
 import DonationBox from "../shared/DonationBox";
+import { useMobileDonationModal } from "@/components/shared/MobileDonationModalContext";
 import SectionWrapper from "@/components/shared/SectionWrapper";
 
 interface HeroProps {
     videoSrc?: string;
+    mobileVideoSrc?: string;
 }
 
-export default function Hero({ videoSrc = "/videos/hero.mp4" }: HeroProps) {
+export default function Hero({
+    videoSrc = "/videos/hero.mp4",
+    mobileVideoSrc = "/videos/hero.mp4",
+}: HeroProps) {
     const t = useTranslations("monthlyDonation.hero");
-    const [isDesktop, setIsDesktop] = useState(false);
-    const [showDonationModal, setShowDonationModal] = useState(false);
-
-    useEffect(() => {
-        setIsDesktop(window.innerWidth >= 768);
-    }, []);
+    const { isOpen: showDonationModal, open: openModal, close: closeModal } = useMobileDonationModal();
 
     /* Lock body scroll when the mobile donation modal is open */
     useEffect(() => {
@@ -31,41 +33,62 @@ export default function Hero({ videoSrc = "/videos/hero.mp4" }: HeroProps) {
         };
     }, [showDonationModal]);
 
-    const openModal = useCallback(() => setShowDonationModal(true), []);
-    const closeModal = useCallback(() => setShowDonationModal(false), []);
-
     return (
         <>
             <SectionWrapper
                 id="monthly-hero"
-                className="relative flex min-h-[90vh] items-center overflow-hidden"
+                className="relative flex min-h-[100svh] items-center overflow-hidden bg-neutral-900"
             >
                 {/* Desktop Video background */}
-                {isDesktop && (
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                        className="absolute inset-0 hidden h-full w-full object-cover md:block"
-                        aria-hidden="true"
-                        poster="/images/hero-poster.webp"
-                    >
-                        <source src={videoSrc} type="video/mp4" />
-                    </video>
-                )}
-
-                {/* Mobile Image background */}
+                {/* Desktop poster — preloaded by Next.js to prevent white flash on first load */}
                 <Image
-                    src="/images/mobile-bg.webp"
-                    alt="School construction in Honduras"
+                    src={heroPoster}
+                    placeholder="blur"
+                    alt=""
                     fill
                     priority
                     quality={60}
                     sizes="100vw"
+                    className="hidden object-cover md:block"
+                    aria-hidden="true"
+                />
+
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 hidden h-full w-full object-cover md:block"
+                    aria-hidden="true"
+                >
+                    <source src={videoSrc} type="video/mp4" media="(min-width: 768px)" />
+                </video>
+
+                {/* Mobile: static image loads first, acts as poster/fallback if video is blocked */}
+                <Image
+                    src={mobileBg}
+                    placeholder="blur"
+                    alt="School construction in Honduras"
+                    fill
+                    priority
+                    quality={60}
+                    sizes="(max-width: 767px) 100vw, 0px"
                     className="block object-cover md:hidden"
                 />
+
+                {/* Mobile: video overlays the image above once it loads */}
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 block h-full w-full object-cover md:hidden"
+                    aria-hidden="true"
+                >
+                    <source src={mobileVideoSrc} type="video/mp4" />
+                </video>
 
                 {/* Mobile dark overlay for text legibility */}
                 <div className="absolute inset-0 bg-black/15 md:hidden" aria-hidden="true" />
@@ -108,7 +131,7 @@ export default function Hero({ videoSrc = "/videos/hero.mp4" }: HeroProps) {
                         : "invisible opacity-0 translate-y-full pointer-events-none"
                 }`}
                 role="dialog"
-                aria-modal={showDonationModal}
+                aria-modal={showDonationModal ? true : undefined}
                 aria-hidden={!showDonationModal}
                 aria-label="Donation form"
             >

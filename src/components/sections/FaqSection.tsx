@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { SectionDivider } from "@/components/ui/section-divider";
 import SectionWrapper from "../shared/SectionWrapper";
 
 type FaqItem = {
@@ -33,11 +34,11 @@ export default function FaqSection() {
               <p className="font-body text-base text-shh-black/90 md:text-lg">
                 {faq.answer}
               </p>
-              {i < faqs.length - 1 && <hr className="mt-2 border-t border-shh-black" />}
+              {i < faqs.length - 1 && <SectionDivider />}
             </div>
           ))}
           {/* Add a bottom divider for the last item as well */}
-          <hr className="mt-2 border-t border-shh-black" />
+          <SectionDivider />
         </div>
       </div>
     </SectionWrapper>

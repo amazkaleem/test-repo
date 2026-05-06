@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Twitter, Facebook, Youtube, Instagram, Mail, Phone, ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { IconTextLink } from "@/components/ui/icon-text-link";
 import { SITE_NAV_LINKS } from "@/lib/nav";
-import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 
 const SOCIAL_LINKS = [
   { label: "Twitter / X", href: "https://twitter.com/SHHonduras", Icon: Twitter },
@@ -20,18 +20,19 @@ export default function Footer() {
       {/* Accent gradient line at top */}
       <div className="h-1 w-full bg-gradient-to-r from-shh-green via-shh-yellow to-shh-green" />
 
-      <div className="mx-auto max-w-6xl px-6 pb-10 pt-16 lg:px-10">
-        {/* ── Main grid ── */}
-        <div className="grid gap-12 md:grid-cols-12">
-          {/* Brand column — spans 5 cols */}
-          <div className="md:col-span-5">
-            <a href="/" aria-label="One Thousand Schools — home">
+      <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 lg:px-10">
+        {/* ── Main content ── */}
+        <div className="flex flex-col gap-12 md:flex-row md:justify-between">
+          {/* Brand column */}
+          <div className="shrink-0 md:w-80">
+            <a href="#monthly-hero" aria-label="One Thousand Schools — home">
               <Image
                 src="/images/logo.png"
                 alt="One Thousand Schools"
                 width={200}
                 height={56}
-                className="h-8 w-auto md:h-14 object-contain"
+                className="h-8 w-auto md:h-14 invert object-contain"
+                style={{ width: "auto" }}
               />
             </a>
             <p className="mt-5 max-w-xs font-body text-sm leading-relaxed text-gray-400">
@@ -39,7 +40,7 @@ export default function Footer() {
             </p>
 
             {/* Social icons */}
-            <div className="mt-6 flex gap-3">
+            <div className="mt-6 flex gap-3 mb-8">
               {SOCIAL_LINKS.map(({ label, href, Icon }) => (
                 <a
                   key={label}
@@ -53,71 +54,58 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+          </div>
 
-            <div className="mt-8">
-              <LocaleSwitcher />
+          {/* Quick Links */}
+          <div className="flex flex-col md:items-center">
+            <div className="flex flex-col">
+              <h3 className="font-title text-[11px] uppercase tracking-[0.2em] text-gray-500">
+                {t("quickLinks")}
+              </h3>
+              <ul className="mt-4 flex flex-col gap-3">
+                {SITE_NAV_LINKS.map((link) => (
+                  <li key={link.key}>
+                    <a
+                      href={link.href}
+                      className="group inline-flex items-center gap-1 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-shh-yellow"
+                    >
+                      {tNav(link.key)}
+                      <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:opacity-100" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          {/* Quick Links — spans 3 cols */}
-          <div className="md:col-span-3">
-            <h3 className="font-title text-[11px] uppercase tracking-[0.2em] text-gray-500">
-              {t("quickLinks")}
-            </h3>
-            <ul className="mt-4 flex flex-col gap-3">
-              {SITE_NAV_LINKS.map((link) => (
-                <li key={link.key}>
-                  <a
-                    href={link.href}
-                    className="group inline-flex items-center gap-1 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-shh-yellow"
-                  >
-                    {tNav(link.key)}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:opacity-100" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Contact — spans 4 cols */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
+            
             <h3 className="font-title text-[11px] uppercase tracking-[0.2em] text-gray-500">
               {t("contact")}
             </h3>
             <ul className="mt-4 flex flex-col gap-3">
               <li>
-                <a
-                  href="mailto:info@shhkids.org"
-                  className="group inline-flex items-center gap-2.5 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-white"
-                >
-                  <Mail className="h-3.5 w-3.5 text-shh-yellow" />
+                <IconTextLink href="mailto:info@shhkids.org" icon={<Mail className="h-3.5 w-3.5 text-shh-yellow" />}>
                   info@shhkids.org
-                </a>
+                </IconTextLink>
               </li>
               <li>
-                <a
-                  href="mailto:trips@shhkids.org"
-                  className="group inline-flex items-center gap-2.5 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-white"
-                >
-                  <Mail className="h-3.5 w-3.5 text-shh-yellow" />
+                <IconTextLink href="mailto:trips@shhkids.org" icon={<Mail className="h-3.5 w-3.5 text-shh-yellow" />}>
                   trips@shhkids.org
-                </a>
+                </IconTextLink>
               </li>
               <li>
-                <a
-                  href="tel:+16315053745"
-                  className="group inline-flex items-center gap-2.5 font-body text-sm text-gray-300 transition-colors duration-200 hover:text-white"
-                >
-                  <Phone className="h-3.5 w-3.5 text-shh-yellow" />
+                <IconTextLink href="tel:+16315053745" icon={<Phone className="h-3.5 w-3.5 text-shh-yellow" />}>
                   +1 631 505 3745
-                </a>
+                </IconTextLink>
               </li>
             </ul>
           </div>
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="mt-14 flex flex-col items-center gap-3 border-t border-white/[0.06] pt-6 sm:flex-row sm:justify-between">
+        <div className=" flex flex-col items-center gap-3 border-t border-white/[0.06] pt-6 sm:flex-row sm:justify-between">
           <p className="font-body text-xs text-gray-600">
             &copy; {new Date().getFullYear()} {t("copyright")}
           </p>

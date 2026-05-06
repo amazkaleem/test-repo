@@ -26,6 +26,12 @@
       "donationSection": {
         "headline": "Conviértete en donante mensual",
         "cancelNote": "Cancela en cualquier momento."
+      },
+      "fallback": {
+        "heading": "Error en el formulario",
+        "description": "Estamos teniendo problemas para cargar el formulario",
+        "subdescription": "Aún puedes donar directamente a través de nuestra página de campaña en GoFundMe.",
+        "cta": "Donar en GoFundMe"
       }
     },
     "pitch": {
@@ -38,7 +44,9 @@
     },
     "updates": {
       "headline": "Recibe actualizaciones exclusivas de Shin y su equipo",
-      "description": "Los donantes mensuales reciben actualizaciones exclusivas detrás de escena del equipo de One Thousand Schools a través de WhatsApp, incluyendo fotos, videos e historias de Villa Soleada y de las escuelas que estás ayudando a construir.",
+      "description": "Los donantes recibirán actualizaciones exclusivas del detrás de escena de Shin y el equipo de One Thousand Schools a través de WhatsApp, incluyendo fotos, videos e historias de Villa Soleada y las escuelas que estás ayudando a construir. Después de donar, serás invitado a unirte a una lista de difusión privada de WhatsApp donde compartiremos actualizaciones en vivo directamente desde los sitios de construcción.",
+      "imageDay1Alt": "Día 1 — comienza la construcción de la escuela",
+      "imageDay68Alt": "Día 68 — la escuela casi terminada",
       "broadcastHeadline": "Únete a nuestro canal de difusión de WhatsApp",
       "broadcastCta": "Unirse Ahora",
       "broadcastOr": "o",
@@ -74,7 +82,7 @@
         },
         {
           "question": "¿Cómo puedo ver el impacto de mi donación?",
-          "answer": "Compartimos regularmente actualizaciones, fotos y videos sobre el progreso de la construcción de escuelas y su impacto en las comunidades. Puedes recibir actualizaciones por correo electrónico o mediante WhatsApp."
+          "answer": "Compartimos regularmente actualizaciones, fotos y videos sobre el progreso de la construcción de escuelas, su impacto en las comunidades y lo que sucede en Villa Soleada. Cuando donas, recibirás una invitación para unirte a nuestra lista de difusión de WhatsApp, donde estas actualizaciones se envían directamente a ti."
         },
         {
           "question": "¿Puedo donar más que las cantidades sugeridas?",
@@ -92,6 +100,23 @@
     },
     "social": {
       "headline": "Sigue el recorrido"
+    },
+    "whatsappModal": {
+      "title": "¡Casi listo \u2014 guarda nuestro número para recibir actualizaciones por WhatsApp!",
+      "description": "DEBES guardar nuestro número para unirte a nuestra lista de WhatsApp y recibir actualizaciones en tiempo real, videos y progreso de los proyectos que estás ayudando a construir.",
+      "ourNumber": "Nuestro número de WhatsApp",
+      "saveVcfTitle": "Guardar contacto (VCF)",
+      "saveVcfDesc": "Descarga y abre para agregar a tus contactos",
+      "copyNumberTitle": "Copiar número",
+      "copyNumberDesc": "Copia este número a tu portapapeles",
+      "chatAction": "Chatea con nosotros en WhatsApp",
+      "chatDesc": "Inicia un chat con este número",
+      "or": "O",
+      "useLink": "Usa este enlace",
+      "copyLink": "Copiar enlace",
+      "copied": "¡Copiado!",
+      "close": "Cerrar",
+      "prefill": "¡Hola, me gustaría recibir actualizaciones!"
     }
   },
   
@@ -100,15 +125,22 @@
     "mission": "Nuestra Misión",
     "impact": "Nuestro Impacto",
     "whatsapp": "Únete a WhatsApp",
-    "menu": "Menú"
+    "faq": "Preguntas frecuentes",
+    "menu": "Menú",
+    "language": "Idioma"
   },
   "footer": {
     "tagline": "Aliviando la violencia y la pobreza extrema en Honduras a través de la educación y el empoderamiento juvenil.",
     "quickLinks": "Enlaces Rápidos",
     "contact": "Contacto",
-    "language": "Idioma",
     "followUs": "Síguenos",
     "copyright": "Students Helping Honduras. Todos los derechos reservados.",
     "nonprofit": "Organización sin fines de lucro 501(c)(3)"
+  },
+  "metadata": {
+    "site_name": "Mil Escuelas",
+    "default_title": "Mil Escuelas — Educación en Honduras",
+    "description": "Mil Escuelas construye escuelas en zonas rurales de Honduras y capacita a maestros para romper el ciclo de la pobreza a través de la educación.",
+    "keywords": "Honduras,educación,organización sin fines de lucro,donar,escuelas,Mil Escuelas,Students Helping Honduras"
   }
 }

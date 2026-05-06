@@ -6,7 +6,7 @@ interface PitchSectionProps {
   videoId?: string;
 }
 
-export default function PitchSection({ videoId = "10jYvPEGtt0" }: PitchSectionProps) {
+export default function PitchSection({ videoId = "AvUAG6X-qaA" }: PitchSectionProps) {
   const t = useTranslations("monthlyDonation.pitch");
 
   return (

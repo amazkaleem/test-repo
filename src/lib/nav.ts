@@ -3,4 +3,5 @@ export const SITE_NAV_LINKS = [
   { key: "donate" as const, href: "#donation-section" },
   { key: "whatsapp" as const, href: "#update-section" },
   { key: "impact" as const, href: "#impact-section" },
+  { key: "faq" as const, href: "#faq-section" },
 ];
