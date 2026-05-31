@@ -35,3 +35,6 @@ next-env.d.ts
 .DS_Store
 Thumbs.db
 *.pem
+
+node_modules
+tina/__generated__
