@@ -2,26 +2,28 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
-import heroPoster from "../../../public/images/hero-poster.webp";
-import mobileBg from "../../../public/images/mobile-bg.webp";
+import { useEffect, useState } from "react";
+import heroPoster from "../../../public/images/hero-poster.v1.webp";
 import DonationBox from "../shared/DonationBox";
 import { useMobileDonationModal } from "@/components/shared/MobileDonationModalContext";
 import SectionWrapper from "@/components/shared/SectionWrapper";
 
 interface HeroProps {
     videoSrc?: string;
-    mobileVideoSrc?: string;
 }
 
 export default function Hero({
-    videoSrc = "/videos/hero.mp4",
-    mobileVideoSrc = "/videos/hero.mp4",
+    videoSrc = "/videos/hero.v1.mp4",
 }: HeroProps) {
     const t = useTranslations("monthlyDonation.hero");
     const { isOpen: showDonationModal, open: openModal, close: closeModal } = useMobileDonationModal();
 
-    /* Lock body scroll when the mobile donation modal is open */
+    const [hydrated, setHydrated] = useState(false);
+
+    useEffect(() => {
+        setHydrated(true);
+    }, []);
+
     useEffect(() => {
         if (showDonationModal) {
             document.body.style.overflow = "hidden";
@@ -39,8 +41,7 @@ export default function Hero({
                 id="monthly-hero"
                 className="relative flex min-h-[100svh] items-center overflow-hidden bg-neutral-900"
             >
-                {/* Desktop Video background */}
-                {/* Desktop poster — preloaded by Next.js to prevent white flash on first load */}
+                {/* Poster — preloaded by Next.js to prevent white flash */}
                 <Image
                     src={heroPoster}
                     placeholder="blur"
@@ -49,53 +50,30 @@ export default function Hero({
                     priority
                     quality={60}
                     sizes="100vw"
-                    className="hidden object-cover md:block"
+                    className="object-cover"
                     aria-hidden="true"
                 />
 
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    className="absolute inset-0 hidden h-full w-full object-cover md:block"
-                    aria-hidden="true"
-                >
-                    <source src={videoSrc} type="video/mp4" media="(min-width: 768px)" />
-                </video>
+                {/* Video — deferred until after hydration so poster paints first */}
+                {hydrated && (
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className="absolute inset-0 h-full w-full object-cover"
+                        aria-hidden="true"
+                    >
+                        <source src={videoSrc} type="video/mp4" />
+                    </video>
+                )}
 
-                {/* Mobile: static image loads first, acts as poster/fallback if video is blocked */}
-                <Image
-                    src={mobileBg}
-                    placeholder="blur"
-                    alt="School construction in Honduras"
-                    fill
-                    priority
-                    quality={60}
-                    sizes="(max-width: 767px) 100vw, 0px"
-                    className="block object-cover md:hidden"
-                />
-
-                {/* Mobile: video overlays the image above once it loads */}
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    className="absolute inset-0 block h-full w-full object-cover md:hidden"
-                    aria-hidden="true"
-                >
-                    <source src={mobileVideoSrc} type="video/mp4" />
-                </video>
-
-                {/* Mobile dark overlay for text legibility */}
-                <div className="absolute inset-0 bg-black/15 md:hidden" aria-hidden="true" />
+                {/* Dark overlay for text legibility */}
+                <div className="absolute inset-0 bg-black/15" aria-hidden="true" />
 
                 {/* Content */}
                 <section className="relative z-10 mx-auto flex w-full flex-col items-center justify-center gap-6 px-4 pb-24 text-center md:flex-row md:items-center md:justify-center md:gap-8 md:px-8 md:pb-16 md:pt-[35px] md:text-left">
-                    {/* Headlines */}
                     <header>
                         <h1 className="animate-fade-in-up font-title text-white md:text-white">
                             <span className="block text-2xl lg:text-4xl xl:text-6xl mb-2">
@@ -135,7 +113,6 @@ export default function Hero({
                 aria-hidden={!showDonationModal}
                 aria-label="Donation form"
             >
-                {/* Close button */}
                 <button
                     type="button"
                     onClick={closeModal}
@@ -145,7 +122,6 @@ export default function Hero({
                     ✕
                 </button>
 
-                {/* Donation widget */}
                 <div className="w-full overflow-y-auto px-4 pt-14 pb-8">
                     <DonationBox className="mx-auto max-w-[400px] shadow-none" />
                 </div>

@@ -6,9 +6,9 @@ import { SITE_NAV_LINKS } from "@/lib/nav";
 
 const SOCIAL_LINKS = [
   { label: "Twitter / X", href: "https://twitter.com/SHHonduras", Icon: Twitter },
-  { label: "Facebook", href: "https://www.facebook.com/studentshelpinghonduras", Icon: Facebook },
+  { label: "Facebook", href: "https://www.facebook.com/1kschools", Icon: Facebook },
   { label: "YouTube", href: "https://www.youtube.com/user/SHHonduras", Icon: Youtube },
-  { label: "Instagram", href: "https://www.instagram.com/SHHonduras", Icon: Instagram },
+  { label: "Instagram", href: "https://www.instagram.com/onethousandschools/", Icon: Instagram },
 ];
 
 export default function Footer() {

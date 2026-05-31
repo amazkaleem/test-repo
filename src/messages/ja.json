@@ -103,7 +103,7 @@
     },
     "whatsappModal": {
       "title": "あと少しです \u2014 WhatsAppの更新情報を受け取るために私たちの番号を保存してください！",
-      "description": "あなたが支援しているプロジェクトのリアルタイムな更新、動画、進捗情報を受け取るには、必ず私たちの番号を保存してWhatsAppリストに参加してください。",
+      "description": "WhatsAppで最新情報を受け取るために、下に表示されている番号を連絡先に保存してください。保存していない場合、メッセージが届かない可能性があります 📲\n\nShinとMil Escuelasのチームから、私たちが建設している学校の最新情報、Villa Soleadaの舞台裏、そしてホンジュラスで共に生み出しているインパクトについての限定ニュースをお届けします 🇭🇳\n\n多くの方にメッセージをお送りしているため、すべてのお返事には対応できない場合があります。\n\nこのミッションに参加してくださり、本当にありがとうございます！❤️",
       "ourNumber": "私たちのWhatsApp番号",
       "saveVcfTitle": "連絡先を保存 (VCF)",
       "saveVcfDesc": "ダウンロードして連絡先に追加",
@@ -138,7 +138,7 @@
   },
   "metadata": {
     "site_name": "One Thousand Schools",
-    "default_title": "One Thousand Schools — ホンジュラスの教育",
+    "default_title": "One Thousand Schools — ホンジュラスに教育と希望を築く",
     "description": "One Thousand Schoolsはホンジュラスの農村地域に学校を建設し、教育を通じて貧困の連鎖を断ち切るために教師を訓練しています。",
     "keywords": "ホンジュラス,教育,非営利団体,寄付,学校,One Thousand Schools,Students Helping Honduras"
   }

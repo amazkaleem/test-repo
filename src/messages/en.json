@@ -103,7 +103,7 @@
     },
     "whatsappModal": {
       "title": "Almost done \u2014 save our number to get WhatsApp updates!",
-      "description": "You MUST save our number to join our WhatsApp list to receive real-time updates, videos, and progress from the projects you\u2019re helping build.",
+      "description": "It's very important that you save the number below in your contacts to receive our WhatsApp updates. If you don't save it, you may not receive our messages 📲\n\nShin and the Mil Escuelas team will send you exclusive updates about the schools we are building, behind-the-scenes moments from Villa Soleada, and the impact we are creating together in Honduras 🇭🇳\n\nDue to the large number of people receiving these messages, we may not be able to reply to every response.\n\nThank you for being part of this mission! ❤️",
       "ourNumber": "Our WhatsApp number",
       "saveVcfTitle": "Save Contact (VCF)",
       "saveVcfDesc": "Download and open to add to your contacts",
@@ -139,7 +139,7 @@
   },
   "metadata": {
     "site_name": "One Thousand Schools",
-    "default_title": "One Thousand Schools — Education in Honduras",
+    "default_title": "One Thousand Schools — Building Education and Hope in Honduras",
     "description": "One Thousand Schools builds schools across rural Honduras and trains teachers to break the cycle of poverty through education.",
     "keywords": "Honduras,education,nonprofit,donate,schools,One Thousand Schools,Students Helping Honduras"
   }

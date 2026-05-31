@@ -1,4 +1,11 @@
-import { DonationSection, FaqSection, Hero, ImpactSection, PitchSection, UpdatesSection } from "@/components/sections";
+import dynamic from "next/dynamic";
+import { Hero } from "@/components/sections";
+
+const PitchSection = dynamic(() => import("@/components/sections/PitchSection"));
+const DonationSection = dynamic(() => import("@/components/sections/DonationSection"));
+const UpdatesSection = dynamic(() => import("@/components/sections/UpdatesSection"));
+const ImpactSection = dynamic(() => import("@/components/sections/ImpactSection"));
+const FaqSection = dynamic(() => import("@/components/sections/FaqSection"));
 
 export default function HomePage({ params: { locale } }: { params: { locale: string } }) {
   const jsonLd = {
@@ -6,8 +13,8 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
     "@type": "NGO",
     name: "One Thousand Schools",
     alternateName: "Students Helping Honduras",
-    url: "https://www.shhkids.org",
-    logo: "https://www.shhkids.org/images/logo.png",
+    url: "https://www.milescuelas.org",
+    logo: "https://www.milescuelas.org/images/logo.png",
     inLanguage: locale,
     description:
       "One Thousand Schools builds schools across rural Honduras and trains teachers to alleviate violence and extreme poverty through education.",

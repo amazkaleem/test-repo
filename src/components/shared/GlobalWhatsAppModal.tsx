@@ -3,34 +3,31 @@
 import { useEffect, useState } from "react";
 import WhatsAppModal from "./WhatsAppModal";
 
+const VALID_ORIGINS = [
+  "https://giving.classy.org",
+  "https://www.classy.org",
+  "https://giving.gofundme.com",
+];
+
+function isTransactionSuccess(data: unknown): boolean {
+  if (typeof data !== "object" || data === null) return false;
+
+  const type = String((data as Record<string, unknown>).type ?? "").toLowerCase();
+
+  return type === "donation_completed_msg_from_app" || type.includes("completed");
+}
+
 export default function GlobalWhatsAppModal() {
   const [showWhatsAppModal, setShowWhatsAppModal] = useState(false);
 
-  // for testing whats app modal
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined" && window.location.search.includes("testModal=true")) {
-  //     const testTimeout = setTimeout(() => setShowWhatsAppModal(true), 2000);
-  //     return () => clearTimeout(testTimeout);
-  //   }
-  // }, []);
-
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      const validOrigins = ["https://www.classy.org", "https://giving.gofundme.com"];
-      if (!validOrigins.includes(event.origin)) return;
+      if (!VALID_ORIGINS.includes(event.origin)) return;
 
       try {
         const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data;
-        
-        const isSuccess = 
-          data === "transactionSuccessful" ||
-          data?.type === "donationResponse" ||
-          data?.event === "transaction.success" ||
-          String(data?.eventName).toLowerCase().includes("complete") ||
-          String(data?.type).toLowerCase().includes("success");
-          
-        if (isSuccess && (data?.transactionId || data?.id || data === "transactionSuccessful")) {
+
+        if (isTransactionSuccess(data)) {
           setShowWhatsAppModal(true);
         }
       } catch {

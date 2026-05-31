@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 const SDK_TIMEOUT_MS = 8_000;
 const DONATION_FALLBACK_URL =
   "https://www.gofundme.com/f/sbkkpx-students-helping-honduras";
+const EMBED_CAMPAIGN_ID = process.env.NEXT_PUBLIC_GOFUNDME_CAMPAIGN_ID;
 
-interface DonationBoxProps {
+interface DonationBoxProps { 
   className?: string;
 }
 
@@ -99,7 +100,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
             alt=""
             width={224}
             height={224}
-            className="mx-auto mt-2 w-56"
+            className="mx-auto mt-2 w-56 h-auto"
             aria-hidden="true"
           />
         </div>
@@ -114,7 +115,7 @@ export default function DonationBox({ className }: DonationBoxProps) {
       >
         <div
           id="3kvNr4sq4nQFlOZCDtY5F"
-          {...({ classy: "782216" } as Record<string, string>)}
+          {...({ classy: EMBED_CAMPAIGN_ID } as Record<string, string>)}
           className="min-h-24"
           aria-label={t("cta")}
         />

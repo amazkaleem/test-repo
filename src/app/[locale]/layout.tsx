@@ -15,7 +15,9 @@ interface LocaleLayoutProps {
   params: { locale: string };
 }
 
-const BASE_URL = "https://www.shhkids.org";
+const BASE_URL = "https://www.milescuelas.org";
+const EMBED_CAMPAIGN_ID =
+  process.env.NEXT_PUBLIC_GOFUNDME_CAMPAIGN_ID;
 
 const OG_LOCALE_MAP: Record<Locale, string> = {
   en: "en_US",
@@ -108,7 +110,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         </MobileDonationModalProvider>
       </NextIntlClientProvider>
       {/* GoFundMe SDK requires this container to validate the installation */}
-      <div className="classy-inline-embed" data-campaign-id="782216" />
+      <div className="classy-inline-embed" data-campaign-id={EMBED_CAMPAIGN_ID} />
     </>
   );
 }

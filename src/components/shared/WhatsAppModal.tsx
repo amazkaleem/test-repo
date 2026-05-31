@@ -55,7 +55,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300",
+        "fixed inset-0 z-[9999] overflow-y-auto overscroll-contain transition-all duration-300",
         isOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
       )}
       role="dialog"
@@ -64,19 +64,19 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
       aria-labelledby="wa-modal-title"
       onKeyDown={(e) => e.key === "Escape" && onClose()}
     >
-      <div 
+      <div
         className={cn(
-          "absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300",
+          "fixed inset-0 z-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300",
           isOpen ? "opacity-100" : "opacity-0"
-        )} 
-        onClick={onClose} 
-      />
-      <div 
-        className={cn(
-          "relative w-full max-w-lg scale-95 transform rounded-2xl bg-white p-6 shadow-2xl transition-all duration-300 sm:p-8 text-center font-body border border-gray-100",
-          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
         )}
-      >
+      />
+      <div className="relative z-[1] flex min-h-[100dvh] w-full items-center justify-center px-4 py-8">
+        <div
+          className={cn(
+            "relative w-full max-w-lg scale-95 transform rounded-2xl bg-white p-6 shadow-2xl transition-all duration-300 sm:p-8 text-center font-body border border-gray-100",
+            isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
+          )}
+        >
         <button
           onClick={onClose}
           className="absolute right-4 top-4 rounded-full p-2 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 focus:outline-none"
@@ -98,9 +98,19 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         <h2 id="wa-modal-title" className="mb-2 font-title text-3xl font-extrabold text-[#111827]">
           {t("title")}
         </h2>
-        <p className="mb-6 text-base text-gray-500 font-medium">
-          {t("description")}
-        </p>
+        <div
+          className="mb-6 mx-auto max-w-prose max-h-28 sm:max-h-32 overflow-y-auto overscroll-y-contain rounded-lg border border-gray-100 bg-gray-50/50 px-3 py-2.5 [scrollbar-gutter:stable] space-y-3 text-sm sm:text-base leading-relaxed text-gray-600 font-medium touch-pan-y"
+          tabIndex={0}
+        >
+          {t("description")
+            .split(/\n\n+/)
+            .filter(Boolean)
+            .map((paragraph, i) => (
+              <p key={i} className="text-center">
+                {paragraph}
+              </p>
+            ))}
+        </div>
         
         <div className="w-full rounded-2xl border border-gray-100 p-5 mb-5 pb-6 bg-white shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)]">
           <p className="mb-1 text-sm font-medium text-gray-500">
@@ -147,7 +157,6 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
           href={waLink}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={onClose}
           className="flex w-full items-center justify-between gap-3 rounded-xl bg-[#24D366] px-5 py-4 font-title text-base font-bold text-white transition-all hover:bg-[#15803D] active:scale-[0.98]"
         >
           <div className="flex items-center gap-2">
@@ -186,7 +195,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
             {copiedLink ? t("copied") : t("copyLink")}
           </button>
         </div>
-        
+        </div>
       </div>
     </div>
   );

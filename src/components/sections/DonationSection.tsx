@@ -7,6 +7,7 @@ import SectionWrapper from "../shared/SectionWrapper";
 
 const GOAL_SUPPORTERS = 1000;
 const COUNT_UP_MS = 1600;
+const ERROR_FALLBACK_SUPPORTERS = 32;
 
 function useCountUp(target: number, triggerRef: React.RefObject<HTMLElement | null>, durationMs = COUNT_UP_MS) {
   const [display, setDisplay] = useState(0);
@@ -51,7 +52,7 @@ function useCountUp(target: number, triggerRef: React.RefObject<HTMLElement | nu
 export default function DonationSection() {
   const t = useTranslations("monthlyDonation");
   const [supportersCount, setSupportersCount] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const displayCount = useCountUp(supportersCount, sectionRef);
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export default function DonationSection() {
         const response = await fetch("/api/supporters", { cache: "no-store" });
 
         if (!response.ok) {
+          setSupportersCount(ERROR_FALLBACK_SUPPORTERS);
           return;
         }
 
@@ -74,7 +76,7 @@ export default function DonationSection() {
           setSupportersCount(data.count);
         }
       } catch {
-        /* keep at 0 when API is unavailable */
+        setSupportersCount(ERROR_FALLBACK_SUPPORTERS);
       }
     }
 
@@ -86,8 +88,8 @@ export default function DonationSection() {
   const formattedGoal = GOAL_SUPPORTERS.toLocaleString();
 
   return (
-    <SectionWrapper ref={sectionRef} id="donation-section" className="bg-[#F5F4EF]">
-      <div className="mx-auto max-w-3xl text-center">
+    <SectionWrapper id="donation-section" className="bg-[#F5F4EF]">
+      <div ref={sectionRef} className="mx-auto max-w-3xl text-center">
         {/* Social-proof headline */}
         <h2 className="section-display-title">
           {t("socialProof.headline", { count: formattedSupporters })}
@@ -99,7 +101,7 @@ export default function DonationSection() {
           <div className="relative h-12 overflow-hidden rounded-full border-2 border-shh-black bg-white">
             {/* Filled portion */}
             <div
-              className="absolute inset-y-0 left-0 m-[3px] rounded-full bg-[#FECB26] transition-all duration-700"
+              className="absolute inset-y-0 left-0 rounded-full bg-[#FECB26] transition-all duration-700"
               style={{ width: `${progressPercent}%` }}
             />
             {/* Label */}

@@ -11,7 +11,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "onethousandschools.com" },
-      { protocol: "https", hostname: "www.shhkids.org" },
+      { protocol: "https", hostname: "www.milescuelas.org" },
     ],
   },
 
@@ -34,8 +34,8 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self';",
-              `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://giving.gofundme.com https://www.youtube.com https://cdn.jsdelivr.net;`,
-              "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;",
+              `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://giving.gofundme.com https://www.youtube.com;`,
+              "style-src 'self' 'unsafe-inline';",
               "img-src 'self' blob: data: https:;",
               "font-src 'self' data:;",
               "connect-src 'self' https://giving.gofundme.com https://*.gofundme.com https://giving.classy.org;",
@@ -47,6 +47,24 @@ const nextConfig = {
               "upgrade-insecure-requests;"
             ].join(" ")
           }
+        ],
+      },
+      {
+        source: "/videos/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/images/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/fonts/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],
       },
     ];

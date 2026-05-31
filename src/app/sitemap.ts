@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/types";
 
-const BASE_URL = "https://www.shhkids.org";
+const BASE_URL = "https://www.milescuelas.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return locales.map((locale) => ({
